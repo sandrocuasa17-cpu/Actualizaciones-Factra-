@@ -2,4 +2,4 @@ User-agent: *
 Allow: /
 Disallow: /version.json
 
-Sitemap: https://factra-five.vercel.app/sitemap.xml
+Sitemap: https://factraecuador.site/sitemap.xml

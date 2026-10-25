@@ -1044,7 +1044,11 @@ async function cargarRelease() {
     if (!r.ok) throw new Error('No release');
     const data = await r.json();
     const exeName = gh.exeName || 'Factra-Ecuador-Setup.exe';
-    const asset = data.assets.find(a => a.name === exeName) || data.assets.find(a => a.name.endsWith('.exe'));
+    // La versión va en el nombre del archivo (Factra_Setup_vX.X.X.exe): se elige el .exe más nuevo
+    const verDe = n => { const m = n.match(/v?(\d+(?:\.\d+)+)/); return m ? m[1].split('.').map(Number) : [0]; };
+    const cmp = (a, b) => { for (let i = 0; i < Math.max(a.length, b.length); i++) { const d = (a[i]||0) - (b[i]||0); if (d) return d; } return 0; };
+    const exes = data.assets.filter(a => a.name.toLowerCase().endsWith('.exe')).sort((a, b) => cmp(verDe(b.name), verDe(a.name)));
+    const asset = (exeName && data.assets.find(a => a.name === exeName)) || exes[0];
     if (asset) {
       // Descarga directa — NO redirige a WhatsApp
       btn.href = asset.browser_download_url;
@@ -1055,7 +1059,7 @@ async function cargarRelease() {
       mainTxt.textContent = dl.btnText || '⬇ Descargar Factra Ecuador';
       const mb = (asset.size / 1024 / 1024).toFixed(1);
       subTxt.textContent = `${dl.btnSub || 'Windows 10/11 · 64-bit'} · ${mb} MB`;
-      versionEl.textContent = data.tag_name;
+      versionEl.textContent = (asset.name.match(/v?(\d+(?:\.\d+)+)/) || [,''])[1] || data.tag_name;
       // Quitar cualquier listener previo que pudiera redirigir a WA
       btn.onclick = null;
     } else throw new Error('Sin .exe');
@@ -1066,7 +1070,7 @@ async function cargarRelease() {
     subTxt.textContent = dl.btnSub || 'Windows 10/11 · 64-bit';
     if (dl.fallbackUrl) {
       prepararDescarga(btn, dl.fallbackUrl);
-      const m = dl.fallbackUrl.match(/\/download\/([^/]+)\//);
+      const m = dl.fallbackUrl.match(/v(\d+(?:\.\d+)+)\.exe/i);
       versionEl.textContent = m ? m[1] : '—';
     } else {
       versionEl.textContent = 'contáctanos por WhatsApp';

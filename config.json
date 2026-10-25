@@ -1,13 +1,13 @@
 {
   "github": {
-    "user": "Sandro21lop",
-    "repo": "FACTRA",
+    "user": "sandrocuasa17-cpu",
+    "repo": "Actualizaciones-Factra-",
     "exeName": ""
   },
   "download": {
     "btnText": "⬇ Descargar Factra Ecuador",
     "btnSub": "Windows 10/11 · 64-bit · Gratis",
-    "fallbackUrl": "https://github.com/Sandro21lop/FACTRA/releases/download/1.0.7/Factra_Setup_v1.0.7.exe"
+    "fallbackUrl": "https://github.com/sandrocuasa17-cpu/Actualizaciones-Factra-/releases/download/Actualizaciones/Factra_Setup_v1.0.9.exe"
   },
   "logo": {
     "url": "",

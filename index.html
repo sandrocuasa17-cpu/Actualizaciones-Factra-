@@ -1,0 +1,1242 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Factra Ecuador — Sistema POS con Facturación Electrónica</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --azul:#0A2E5C;
+  --azul2:#1350A0;
+  --azul3:#2272E8;
+  --azul4:#5A9BF5;
+  --acento:#F5B800;
+  --acento2:#FF6B2B;
+  --claro:#F2F7FF;
+  --claro2:#E6EEFF;
+  --texto:#08192E;
+  --texto2:#4A5E72;
+  --texto3:#8A9BB0;
+  --blanco:#FFFFFF;
+  --borde:#D4E2F4;
+  --borde2:#C0D4ED;
+  --verde:#00C17C;
+  --shadow-sm:0 1px 3px rgba(10,46,92,.08),0 1px 2px rgba(10,46,92,.06);
+  --shadow-md:0 4px 16px rgba(10,46,92,.1),0 2px 6px rgba(10,46,92,.06);
+  --shadow-lg:0 16px 48px rgba(10,46,92,.14),0 4px 12px rgba(10,46,92,.08);
+  --shadow-xl:0 32px 80px rgba(10,46,92,.18);
+  --r:14px;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Plus Jakarta Sans',sans-serif;color:var(--texto);background:var(--blanco);overflow-x:hidden;-webkit-font-smoothing:antialiased}
+
+/* ── NAV ─────────────────────────────────────────── */
+nav{
+  position:sticky;top:0;z-index:200;
+  background:rgba(255,255,255,.92);
+  backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);
+  border-bottom:1px solid rgba(212,226,244,.7);
+  padding:0 1.5rem;
+}
+.nav-inner{max-width:1120px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:64px;gap:1rem}
+.logo{display:flex;align-items:center;gap:.65rem;text-decoration:none;flex-shrink:0}
+.logo img{height:36px;width:auto}
+.logo-text{font-family:'Fraunces',serif;font-weight:700;font-size:1.2rem;color:var(--azul);letter-spacing:-.3px}
+.logo-text span{color:var(--azul3)}
+.nav-links{display:flex;gap:.25rem;list-style:none;align-items:center}
+.nav-links a{text-decoration:none;font-size:.88rem;font-weight:500;color:var(--texto2);padding:.45rem .85rem;border-radius:8px;transition:color .18s,background .18s;white-space:nowrap}
+.nav-links a:hover{color:var(--azul);background:var(--claro)}
+.nav-cta{background:var(--azul)!important;color:#fff!important;padding:.5rem 1.25rem!important;border-radius:9px!important;font-weight:600!important;transition:background .2s,transform .15s,box-shadow .2s!important}
+.nav-cta:hover{background:var(--azul2)!important;transform:translateY(-1px)!important;box-shadow:0 4px 14px rgba(10,46,92,.28)!important}
+.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:.4rem;color:var(--azul);border-radius:7px}
+.nav-toggle svg{width:22px;height:22px;stroke:currentColor;stroke-width:2;fill:none;display:block}
+
+/* ── HERO ─────────────────────────────────────────── */
+.hero{
+  position:relative;overflow:hidden;
+  background:linear-gradient(160deg,#041726 0%,#082348 40%,#0D3B6E 70%,#144EA0 100%);
+  min-height:90vh;display:flex;align-items:center;
+}
+.hero::before{
+  content:'';position:absolute;inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+  opacity:.032;pointer-events:none;z-index:0;
+}
+.hero-blob{position:absolute;border-radius:50%;filter:blur(80px);pointer-events:none;z-index:0}
+.hero-blob-1{width:600px;height:600px;background:radial-gradient(circle,rgba(34,114,232,.22) 0%,transparent 70%);top:-15%;right:-5%}
+.hero-blob-2{width:400px;height:400px;background:radial-gradient(circle,rgba(245,184,0,.1) 0%,transparent 70%);bottom:-10%;left:5%}
+.hero-blob-3{width:300px;height:300px;background:radial-gradient(circle,rgba(0,193,124,.09) 0%,transparent 70%);top:30%;left:30%}
+.hero-dots{
+  position:absolute;inset:0;
+  background-image:radial-gradient(rgba(255,255,255,.07) 1px,transparent 1px);
+  background-size:32px 32px;
+  mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 40%,transparent 100%);
+  pointer-events:none;z-index:0;
+}
+.hero-inner{
+  max-width:1120px;margin:0 auto;padding:4.5rem 1.5rem 5rem;
+  display:grid;grid-template-columns:1fr 1.15fr;gap:3.5rem;align-items:center;
+  position:relative;z-index:1;width:100%;
+}
+.hero-badge{
+  display:inline-flex;align-items:center;gap:.5rem;
+  background:rgba(34,114,232,.2);border:1px solid rgba(34,114,232,.4);
+  color:var(--azul4);font-size:.78rem;font-weight:600;padding:.35rem 1rem;
+  border-radius:100px;margin-bottom:1.75rem;letter-spacing:.4px;text-transform:uppercase;
+}
+.hero-badge .flag{font-size:.9rem}
+.hero h1{
+  font-family:'Fraunces',serif;font-weight:900;
+  font-size:3.5rem;line-height:1.06;color:#fff;
+  letter-spacing:-2px;margin-bottom:1.5rem;
+}
+.hero h1 em{
+  font-style:italic;font-weight:700;
+  background:linear-gradient(135deg,var(--acento) 0%,var(--acento2) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.hero-sub{
+  font-size:1.05rem;line-height:1.8;
+  color:rgba(255,255,255,.68);margin-bottom:2.25rem;font-weight:300;
+  max-width:500px;
+}
+.hero-btns{display:flex;gap:.85rem;flex-wrap:wrap;align-items:center}
+
+/* Download btn */
+.btn-download{
+  background:linear-gradient(135deg,var(--acento) 0%,#F5A200 100%);
+  color:var(--texto);font-family:'Plus Jakarta Sans',sans-serif;
+  font-weight:700;font-size:.95rem;padding:.85rem 1.65rem;
+  border-radius:11px;border:none;cursor:pointer;
+  transition:transform .2s,box-shadow .2s;
+  text-decoration:none;display:inline-flex;flex-direction:column;
+  align-items:center;line-height:1.2;
+  box-shadow:0 4px 20px rgba(245,184,0,.35);
+}
+.btn-download:hover{transform:translateY(-2px);box-shadow:0 8px 32px rgba(245,184,0,.5)}
+.btn-download.loading{opacity:.65;pointer-events:none}
+.btn-download-main{font-size:.93rem;font-weight:700}
+.btn-download-sub{font-size:.7rem;font-weight:400;opacity:.72;margin-top:.15rem}
+.btn-ghost{
+  background:transparent;color:rgba(255,255,255,.85);
+  font-family:'Plus Jakarta Sans',sans-serif;font-weight:500;font-size:.93rem;
+  padding:.85rem 1.4rem;border-radius:11px;
+  border:1px solid rgba(255,255,255,.22);
+  cursor:pointer;transition:background .18s,border-color .18s;
+  text-decoration:none;display:inline-block;
+}
+.btn-ghost:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.4)}
+
+/* Version badge */
+.version-badge{
+  display:inline-flex;align-items:center;gap:.45rem;
+  font-size:.75rem;color:rgba(255,255,255,.45);margin-top:.9rem;
+}
+.vdot{width:7px;height:7px;border-radius:50%;background:var(--verde);box-shadow:0 0 6px rgba(0,193,124,.7)}
+#version-text{font-weight:600;color:rgba(255,255,255,.65)}
+
+/* Hero visual */
+.hero-visual{position:relative}
+.hero-screen-wrap{
+  border-radius:16px;overflow:hidden;
+  box-shadow:0 32px 80px rgba(0,0,0,.55),inset 0 1px 0 rgba(255,255,255,.12);
+  border:1px solid rgba(255,255,255,.18);
+  background:#0a1e38;
+  aspect-ratio:16/10;
+  position:relative;
+  cursor:pointer;
+  transition:transform .25s,box-shadow .25s;
+}
+.hero-screen-wrap:hover{transform:translateY(-4px) scale(1.01);box-shadow:0 44px 96px rgba(0,0,0,.65),inset 0 1px 0 rgba(255,255,255,.15)}
+.hero-screen-wrap::after{
+  content:'🔍 clic para ampliar';
+  position:absolute;bottom:10px;right:12px;
+  background:rgba(0,0,0,.5);color:rgba(255,255,255,.75);
+  font-size:.68rem;font-weight:600;padding:.22rem .65rem;
+  border-radius:100px;letter-spacing:.3px;
+  opacity:0;transition:opacity .2s;pointer-events:none;
+  backdrop-filter:blur(4px);z-index:5;
+}
+.hero-screen-wrap:hover::after{opacity:1}
+.hero-screen-track{position:relative;width:100%;height:100%}
+.hero-screen-slide{position:absolute;inset:0;opacity:0;transition:opacity .8s ease;pointer-events:none}
+.hero-screen-slide.active{opacity:1;pointer-events:auto}
+.hero-screen-slide img{width:100%;height:100%;object-fit:contain;display:block;background:#0a1e38}
+
+/* Floating tags */
+.mock-tag{
+  position:absolute;background:#fff;
+  border-radius:12px;padding:.6rem 1rem;
+  box-shadow:var(--shadow-lg);
+  display:flex;align-items:center;gap:.6rem;
+  font-size:.8rem;font-weight:600;color:var(--texto);
+  white-space:nowrap;
+}
+.mock-tag-icon{font-size:1.1rem}
+.mock-tag.left{bottom:-1.5rem;left:-2rem}
+.mock-tag.right{top:-1.25rem;right:-1.5rem}
+.mock-tag .tag-val{color:var(--verde);font-weight:700;font-size:.85rem}
+
+/* ── STATS BAR ─────────────────────────────────────── */
+.stats-bar{background:#fff;border-bottom:1px solid var(--borde);box-shadow:0 2px 0 rgba(10,46,92,.04)}
+.stats-inner{
+  max-width:1120px;margin:0 auto;
+  padding:2rem 1.5rem;
+  display:grid;grid-template-columns:repeat(4,1fr);
+  gap:1rem;text-align:center;
+}
+.stat-divider{border-left:1px solid var(--borde)}
+.stat-n{font-family:'Fraunces',serif;font-weight:900;font-size:2.4rem;color:var(--azul);letter-spacing:-2px;line-height:1}
+.stat-n span{color:var(--azul3)}
+.stat-l{font-size:.82rem;color:var(--texto2);margin-top:.35rem;font-weight:500}
+
+/* ── GALERÍA / CARRUSEL ─────────────────────────────── */
+.galeria-section{background:var(--claro);padding:5rem 0;border-top:1px solid var(--borde)}
+.galeria-inner{max-width:1120px;margin:0 auto;padding:0 1.5rem}
+
+.carousel-wrap{position:relative;margin-top:2.5rem;max-width:860px;margin-left:auto;margin-right:auto;padding:0 24px}
+.carousel-track-outer{overflow:hidden;border-radius:14px;box-shadow:var(--shadow-xl)}
+.carousel-track{display:flex;transition:transform .55s cubic-bezier(.4,0,.2,1);will-change:transform}
+.carousel-slide{min-width:100%;position:relative;background:#0a1e38;cursor:pointer;flex-shrink:0}
+.carousel-slide img{width:100%;height:auto;max-height:520px;object-fit:contain;display:block;border-radius:14px;background:#0d1f3c}
+.carousel-slide::after{
+  content:'🔍 clic para ampliar';
+  position:absolute;bottom:12px;right:14px;
+  background:rgba(0,0,0,.5);color:rgba(255,255,255,.8);
+  font-size:.7rem;font-weight:600;padding:.22rem .7rem;
+  border-radius:100px;opacity:0;transition:opacity .2s;
+  pointer-events:none;backdrop-filter:blur(4px);
+}
+.carousel-slide:hover::after{opacity:1}
+.carousel-cap{
+  position:absolute;bottom:0;left:0;right:0;
+  background:linear-gradient(to top,rgba(4,18,38,.92) 0%,transparent 100%);
+  color:#fff;font-size:.88rem;font-weight:500;
+  padding:2.5rem 1.5rem .9rem;border-radius:0 0 18px 18px;
+  pointer-events:none;
+}
+.carousel-btn{
+  position:absolute;top:50%;transform:translateY(-50%);
+  width:44px;height:44px;border-radius:50%;
+  background:rgba(255,255,255,.92);
+  border:1.5px solid var(--borde);
+  display:flex;align-items:center;justify-content:center;
+  cursor:pointer;z-index:10;
+  box-shadow:0 4px 16px rgba(10,46,92,.18);
+  transition:background .18s,transform .18s,box-shadow .18s;
+  color:var(--azul);
+}
+.carousel-btn:hover{background:#fff;transform:translateY(-50%) scale(1.08);box-shadow:0 8px 28px rgba(10,46,92,.28)}
+.carousel-btn svg{width:18px;height:18px;stroke:currentColor;stroke-width:2.5;fill:none}
+.carousel-btn.prev{left:0px}
+.carousel-btn.next{right:0px}
+.carousel-dots{display:flex;justify-content:center;gap:.55rem;margin-top:1.5rem}
+.cdot{width:8px;height:8px;border-radius:50%;background:var(--borde2);border:none;cursor:pointer;padding:0;transition:background .25s,transform .25s,width .25s}
+.cdot.active{background:var(--azul3);width:24px;border-radius:4px}
+.carousel-thumbs{display:flex;gap:.65rem;margin-top:1.2rem;overflow-x:auto;padding-bottom:.4rem;scrollbar-width:thin;scrollbar-color:var(--borde2) transparent}
+.carousel-thumbs::-webkit-scrollbar{height:4px}
+.carousel-thumbs::-webkit-scrollbar-track{background:transparent}
+.carousel-thumbs::-webkit-scrollbar-thumb{background:var(--borde2);border-radius:2px}
+.cthumb{flex-shrink:0;width:90px;aspect-ratio:16/9;border-radius:8px;overflow:hidden;border:2px solid transparent;cursor:pointer;transition:border-color .2s,opacity .2s,transform .2s;opacity:.55}
+.cthumb img{width:100%;height:100%;object-fit:cover;display:block}
+.cthumb.active{border-color:var(--azul3);opacity:1;transform:translateY(-2px)}
+.cthumb:hover{opacity:.85}
+.carousel-counter{
+  position:absolute;top:14px;right:16px;
+  background:rgba(0,0,0,.45);color:rgba(255,255,255,.85);
+  font-size:.72rem;font-weight:600;padding:.22rem .7rem;
+  border-radius:100px;letter-spacing:.3px;pointer-events:none;z-index:5;
+  backdrop-filter:blur(6px);
+}
+
+/* Lightbox */
+.lightbox{display:none;position:fixed;inset:0;background:rgba(4,18,38,.92);z-index:2000;align-items:center;justify-content:center;padding:1rem;backdrop-filter:blur(8px)}
+.lightbox.open{display:flex}
+.lightbox img{max-width:92vw;max-height:88vh;border-radius:12px;box-shadow:0 32px 80px rgba(0,0,0,.6);display:block;object-fit:contain}
+.lightbox-close{position:fixed;top:1.25rem;right:1.5rem;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);color:#fff;font-size:1.4rem;width:40px;height:40px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .18s}
+.lightbox-close:hover{background:rgba(255,255,255,.25)}
+
+/* ── SECTIONS ─────────────────────────────────────── */
+.tickets-section{background:#fff;padding:5rem 0;border-top:1px solid var(--borde)}
+.tickets-inner{max-width:1100px;margin:0 auto;padding:0 1.5rem}
+.tickets-tabs{display:flex;gap:.5rem;margin-top:2.5rem;border-bottom:2px solid var(--borde);flex-wrap:wrap}
+.ttab{padding:.6rem 1.4rem;font-size:.85rem;font-weight:600;border:none;background:none;cursor:pointer;color:var(--texto2);border-bottom:2.5px solid transparent;margin-bottom:-2px;transition:color .18s,border-color .18s;font-family:'Plus Jakarta Sans',sans-serif;display:flex;align-items:center;gap:.45rem;border-radius:8px 8px 0 0}
+.ttab:hover{color:var(--azul)}
+.ttab.active{color:var(--azul);border-bottom-color:var(--azul3)}
+.ttab-badge{font-size:.62rem;font-weight:700;padding:.1rem .45rem;border-radius:100px;background:var(--claro2);color:var(--azul3);letter-spacing:.3px;text-transform:uppercase}
+.ticket-panel{display:none}
+.ticket-panel.active{display:grid;grid-template-columns:1fr 1fr;gap:3.5rem;align-items:start;padding:2.5rem 0 1rem}
+.ticket-info h3{font-size:1.4rem;font-weight:800;color:var(--azul);margin-bottom:.75rem;line-height:1.25}
+.ticket-info p{font-size:.93rem;color:var(--texto2);line-height:1.75;margin-bottom:1.5rem}
+.ticket-negocios{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:1.8rem}
+.tneg{display:inline-flex;align-items:center;gap:.35rem;font-size:.78rem;font-weight:600;padding:.32rem .8rem;border-radius:100px;border:1.5px solid}
+.tneg.ok{color:#059669;border-color:#6ee7b7;background:#ecfdf5}
+.tneg.no{color:#dc2626;border-color:#fca5a5;background:#fef2f2}
+.ticket-features{list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:.6rem}
+.ticket-features li{display:flex;align-items:flex-start;gap:.65rem;font-size:.87rem;color:var(--texto);line-height:1.5}
+.ticket-features li::before{content:'\2713';color:#059669;font-weight:800;flex-shrink:0;margin-top:.05rem}
+.ticket-preview{display:flex;justify-content:center;padding-top:.5rem}
+.ticket-img-wrap{position:relative;max-width:260px;width:100%;filter:drop-shadow(0 16px 40px rgba(0,0,0,.2));cursor:pointer;transition:transform .22s}
+.ticket-img-wrap:hover{transform:scale(1.03)}
+.ticket-img-wrap img{width:100%;height:auto;display:block;border-radius:6px}
+.ticket-img-hint{position:absolute;bottom:-12px;left:50%;transform:translateX(-50%);background:var(--azul);color:#fff;font-size:.68rem;font-weight:600;padding:.25rem .85rem;border-radius:100px;white-space:nowrap;box-shadow:0 4px 12px rgba(10,46,92,.28)}
+
+.section{max-width:1120px;margin:0 auto;padding:5.5rem 1.5rem}
+.section-tag{
+  display:inline-flex;align-items:center;gap:.4rem;
+  font-size:.72rem;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;
+  color:var(--azul3);background:var(--claro2);
+  border:1px solid var(--borde2);padding:.3rem .95rem;
+  border-radius:100px;margin-bottom:1.1rem;
+}
+.section-title{
+  font-family:'Fraunces',serif;font-weight:900;font-size:2.6rem;
+  letter-spacing:-1.5px;color:var(--azul);line-height:1.1;
+  margin-bottom:.85rem;
+}
+.section-sub{font-size:1.02rem;color:var(--texto2);line-height:1.75;max-width:580px;font-weight:400}
+
+/* ── MÓDULOS ─────────────────────────────────────── */
+.modulos-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem;margin-top:2.5rem}
+.mod-card{
+  background:#fff;border:1.5px solid var(--borde);
+  border-radius:var(--r);padding:1.6rem;
+  transition:border-color .22s,box-shadow .22s,transform .22s;
+  cursor:default;position:relative;overflow:hidden;
+}
+.mod-card::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,var(--claro2) 0%,transparent 60%);opacity:0;transition:opacity .22s;pointer-events:none}
+.mod-card:hover{border-color:var(--azul3);box-shadow:0 8px 32px rgba(34,114,232,.12);transform:translateY(-3px)}
+.mod-card:hover::after{opacity:1}
+.mod-icon{width:46px;height:46px;border-radius:11px;background:var(--claro);border:1px solid var(--borde);display:flex;align-items:center;justify-content:center;margin-bottom:1.1rem;font-size:1.35rem}
+.mod-title{font-family:'Fraunces',serif;font-weight:700;font-size:1.05rem;color:var(--azul);margin-bottom:.45rem;letter-spacing:-.3px}
+.mod-desc{font-size:.86rem;color:var(--texto2);line-height:1.65}
+
+/* ── NEGOCIOS ─────────────────────────────────────── */
+.negocios-section{
+  background:linear-gradient(160deg,#041726 0%,#082348 50%,#0D3B6E 100%);
+  padding:6rem 0;position:relative;overflow:hidden;
+}
+.negocios-section::before{content:'';position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.05) 1px,transparent 1px);background-size:28px 28px;pointer-events:none}
+.negocios-inner{max-width:1120px;margin:0 auto;padding:0 1.5rem;position:relative;z-index:1}
+.negocios-inner .section-title{color:#fff}
+.negocios-inner .section-sub{color:rgba(255,255,255,.6)}
+.negocios-inner .section-tag{background:rgba(34,114,232,.2);border-color:rgba(34,114,232,.4);color:var(--azul4)}
+.negocios-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.9rem;margin-top:2.5rem}
+.neg-card{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:var(--r);padding:1.4rem 1.5rem;transition:background .2s,border-color .2s,transform .2s}
+.neg-card:hover{background:rgba(255,255,255,.11);border-color:rgba(34,114,232,.5);transform:translateY(-3px)}
+.neg-emoji{font-size:1.7rem;margin-bottom:.8rem;display:block}
+.neg-title{font-family:'Fraunces',serif;font-weight:700;font-size:1.05rem;color:#fff;margin-bottom:.4rem;letter-spacing:-.2px}
+.neg-desc{font-size:.83rem;color:rgba(255,255,255,.55);line-height:1.6}
+
+/* ── SRI ─────────────────────────────────────────── */
+.sri-section{padding:6rem 0;background:#fff}
+.sri-inner{max-width:1120px;margin:0 auto;padding:0 1.5rem;display:grid;grid-template-columns:1fr 1fr;gap:5rem;align-items:center}
+.sri-list{list-style:none;margin-top:1.75rem;display:flex;flex-direction:column;gap:.8rem}
+.sri-item{display:flex;align-items:flex-start;gap:.85rem;font-size:.94rem;color:var(--texto2);line-height:1.65}
+.sri-check{width:24px;height:24px;border-radius:50%;background:linear-gradient(135deg,var(--azul3),var(--azul2));display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:.1rem;box-shadow:0 2px 8px rgba(34,114,232,.3)}
+.sri-check svg{width:11px;height:11px;stroke:#fff;stroke-width:3;fill:none}
+.sri-visual{background:var(--claro);border:1.5px solid var(--borde);border-radius:18px;padding:2.25rem}
+.sri-visual-title{font-family:'Fraunces',serif;font-weight:700;font-size:1.1rem;color:var(--azul);margin-bottom:1.5rem;letter-spacing:-.3px}
+.sri-steps{display:flex;flex-direction:column;gap:.65rem}
+.step{display:flex;align-items:center;gap:1rem}
+.step-num{width:38px;height:38px;border-radius:50%;background:linear-gradient(135deg,var(--azul),var(--azul2));color:#fff;display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-weight:700;font-size:.92rem;flex-shrink:0;box-shadow:0 3px 10px rgba(10,46,92,.25)}
+.step-text{font-size:.9rem;color:var(--texto);font-weight:400}
+.step-hl{font-weight:600;color:var(--azul2)}
+.step-arrow{margin:0 0 0 1.15rem;color:var(--azul4);font-size:1rem;line-height:1;opacity:.5}
+
+/* ── PRECIOS ─────────────────────────────────────── */
+.precios-section{background:var(--claro)}
+.precios-inner{max-width:1120px;margin:0 auto;padding:5.5rem 1.5rem}
+.gratis-card{
+  background:linear-gradient(135deg,var(--azul) 0%,var(--azul2) 100%);
+  border-radius:18px;padding:2.25rem 2.5rem;
+  display:flex;align-items:center;justify-content:space-between;
+  gap:2rem;flex-wrap:wrap;margin-bottom:2rem;
+  box-shadow:0 12px 40px rgba(10,46,92,.25);
+  position:relative;overflow:hidden;
+}
+.gratis-card::before{content:'';position:absolute;right:-80px;top:-80px;width:280px;height:280px;border-radius:50%;background:rgba(255,255,255,.04)}
+.gratis-card::after{content:'';position:absolute;right:40px;bottom:-100px;width:200px;height:200px;border-radius:50%;background:rgba(255,255,255,.03)}
+.gratis-tag{background:var(--acento);color:var(--texto);font-weight:700;font-size:.75rem;letter-spacing:.6px;padding:.3rem .95rem;border-radius:100px;display:inline-block;margin-bottom:.85rem;text-transform:uppercase}
+.gratis-h{font-family:'Fraunces',serif;font-weight:900;font-size:1.75rem;color:#fff;letter-spacing:-.5px;margin-bottom:.6rem}
+.gratis-p{font-size:.92rem;color:rgba(255,255,255,.72);line-height:1.65;max-width:490px}
+.gratis-note{font-size:.8rem;color:rgba(255,255,255,.5);margin-top:.6rem}
+.gratis-cta{flex-shrink:0;position:relative;z-index:1}
+
+.planes-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1rem}
+.plan-card{
+  background:#fff;border:1.5px solid var(--borde);
+  border-radius:var(--r);padding:1.6rem 1.25rem;
+  text-align:center;transition:border-color .22s,transform .22s,box-shadow .22s;
+  position:relative;
+}
+.plan-card:hover{border-color:var(--azul3);transform:translateY(-3px);box-shadow:var(--shadow-md)}
+.plan-card.popular{border-color:var(--azul3);border-width:2px;background:linear-gradient(160deg,#F0F6FF,#fff)}
+.plan-popular-badge{
+  position:absolute;top:-13px;left:50%;transform:translateX(-50%);
+  background:linear-gradient(135deg,var(--azul2),var(--azul3));
+  color:#fff;font-size:.68rem;font-weight:700;
+  padding:.28rem .85rem;border-radius:100px;white-space:nowrap;
+  letter-spacing:.4px;box-shadow:0 3px 10px rgba(34,114,232,.35);
+}
+.plan-name{font-family:'Fraunces',serif;font-weight:700;font-size:1rem;color:var(--azul);margin-bottom:.25rem}
+.plan-dur{font-size:.78rem;color:var(--texto3);margin-bottom:1.1rem;font-weight:500}
+.plan-price{font-family:'Fraunces',serif;font-weight:900;font-size:2.1rem;color:var(--azul);letter-spacing:-1px;line-height:1}
+.plan-price sup{font-size:.9rem;vertical-align:top;margin-top:.35rem;font-weight:700}
+.plan-price sub{font-size:.72rem;font-weight:400;color:var(--texto3)}
+.plan-save{font-size:.72rem;color:var(--verde);font-weight:700;margin-top:.45rem;min-height:1rem}
+
+/* Botón en cada plan */
+.plan-btn{
+  display:block;margin-top:1.25rem;
+  background:var(--azul);color:#fff;
+  font-family:'Plus Jakarta Sans',sans-serif;font-weight:600;font-size:.8rem;
+  padding:.55rem .85rem;border-radius:9px;
+  text-decoration:none;text-align:center;
+  transition:background .18s,transform .15s;
+  cursor:pointer;border:none;width:100%;
+}
+.plan-btn:hover{background:var(--azul2);transform:translateY(-1px)}
+.plan-card.popular .plan-btn{background:var(--azul3)}
+.plan-card.popular .plan-btn:hover{background:var(--azul2)}
+
+/* Gratis plan btn */
+.plan-btn-gratis{
+  display:block;margin-top:1.25rem;
+  background:transparent;color:var(--texto3);
+  font-family:'Plus Jakarta Sans',sans-serif;font-weight:600;font-size:.8rem;
+  padding:.55rem .85rem;border-radius:9px;
+  border:1.5px solid var(--borde);
+  text-decoration:none;text-align:center;
+  transition:border-color .18s,color .18s;
+  cursor:pointer;width:100%;
+}
+.plan-btn-gratis:hover{border-color:var(--azul3);color:var(--azul)}
+
+/* ── TESTIMONIOS ─────────────────────────────────── */
+.testi-section{background:#fff;padding:5.5rem 0;border-top:1px solid var(--borde)}
+.testi-inner{max-width:1120px;margin:0 auto;padding:0 1.5rem}
+.testi-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem;margin-top:2.5rem}
+.testi-card{background:var(--claro);border:1.5px solid var(--borde);border-radius:var(--r);padding:1.6rem}
+.testi-stars{color:var(--acento);font-size:1rem;margin-bottom:.85rem;letter-spacing:1px}
+.testi-text{font-size:.9rem;color:var(--texto2);line-height:1.7;margin-bottom:1.1rem;font-style:italic}
+.testi-author{display:flex;align-items:center;gap:.75rem}
+.testi-avatar{width:40px;height:40px;border-radius:50%;background:linear-gradient(135deg,var(--azul),var(--azul3));display:flex;align-items:center;justify-content:center;font-family:'Fraunces',serif;font-weight:700;font-size:1rem;color:#fff;flex-shrink:0}
+.testi-name{font-weight:700;font-size:.88rem;color:var(--texto)}
+.testi-biz{font-size:.78rem;color:var(--texto3)}
+
+/* ── CTA FINAL ─────────────────────────────────── */
+.cta-section{
+  background:linear-gradient(135deg,#0A2E5C 0%,#1350A0 50%,#2272E8 100%);
+  padding:6rem 1.5rem;text-align:center;position:relative;overflow:hidden;
+}
+.cta-section::before{content:'';position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.05) 1px,transparent 1px);background-size:32px 32px;pointer-events:none}
+.cta-inner{max-width:620px;margin:0 auto;position:relative;z-index:1}
+.cta-section .section-title{color:#fff;font-size:2.8rem}
+.cta-section p{color:rgba(255,255,255,.75);font-size:1.05rem;margin-bottom:2.25rem;line-height:1.75}
+.btn-white{
+  background:#fff;color:var(--azul);
+  font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;font-size:1.05rem;
+  padding:.95rem 2.25rem;border-radius:11px;border:none;cursor:pointer;
+  transition:transform .2s,box-shadow .2s;text-decoration:none;display:inline-block;
+  box-shadow:0 4px 20px rgba(0,0,0,.2);
+}
+.btn-white:hover{transform:translateY(-2px);box-shadow:0 10px 32px rgba(0,0,0,.28)}
+
+/* ── FOOTER ─────────────────────────────────────── */
+footer{background:var(--azul);color:rgba(255,255,255,.45);text-align:center;padding:2.25rem 1.5rem;font-size:.83rem;line-height:1.9}
+footer strong{color:rgba(255,255,255,.85)}
+footer a{color:rgba(255,255,255,.5);text-decoration:none}
+footer a:hover{color:var(--acento)}
+
+/* ── BUTTONS ─────────────────────────────────────── */
+.btn-primary{
+  background:linear-gradient(135deg,var(--acento),#F5A200);
+  color:var(--texto);font-family:'Plus Jakarta Sans',sans-serif;font-weight:700;
+  font-size:1rem;padding:.9rem 1.85rem;border-radius:11px;border:none;
+  cursor:pointer;transition:transform .2s,box-shadow .2s;
+  text-decoration:none;display:inline-block;
+  box-shadow:0 4px 18px rgba(245,184,0,.35);
+}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(245,184,0,.5)}
+
+/* ── WHATSAPP FAB ───────────────────────────────── */
+.wa-fab{
+  position:fixed;bottom:1.75rem;right:1.75rem;z-index:300;
+  background:#25D366;color:#fff;width:60px;height:60px;
+  border-radius:50%;display:flex;align-items:center;justify-content:center;
+  box-shadow:0 4px 24px rgba(37,211,102,.5);text-decoration:none;
+  transition:transform .2s,box-shadow .2s;
+}
+.wa-fab:hover{transform:scale(1.1);box-shadow:0 8px 32px rgba(37,211,102,.65)}
+.wa-fab svg{width:31px;height:31px;fill:#fff}
+
+/* ── ANIMATIONS ─────────────────────────────────── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.hero-content{animation:fadeUp .75s ease both}
+.hero-visual{animation:fadeUp .75s .18s ease both}
+.mock-tag.left{animation:float 4s ease-in-out infinite}
+.mock-tag.right{animation:float 4s .8s ease-in-out infinite}
+
+/* ── RESPONSIVE ─────────────────────────────────── */
+@media(max-width:1024px){
+  .planes-grid{grid-template-columns:repeat(3,1fr)}
+  .hero h1{font-size:3rem}
+}
+@media(max-width:960px){
+  .hero-inner{grid-template-columns:1fr;gap:2.5rem;padding:3.5rem 1.5rem 4rem;text-align:center}
+  .hero h1{font-size:2.75rem}
+  .hero-sub{margin:0 auto 2rem;max-width:480px}
+  .hero-btns{justify-content:center}
+  .version-badge{justify-content:center}
+  .hero-visual{display:none}
+  .modulos-grid{grid-template-columns:1fr 1fr}
+  .negocios-grid{grid-template-columns:1fr 1fr}
+  .planes-grid{grid-template-columns:1fr 1fr;gap:.85rem}
+  .sri-inner{grid-template-columns:1fr;gap:2.5rem}
+  .stats-inner{grid-template-columns:1fr 1fr}
+  .nav-links{display:none}
+  .nav-toggle{display:flex}
+  .testi-grid{grid-template-columns:1fr 1fr}
+  .section-title{font-size:2.2rem}
+  .ticket-panel.active{grid-template-columns:1fr}
+  .ticket-preview{order:-1}
+  .ticket-img-wrap{max-width:200px;margin:0 auto}
+}
+@media(max-width:640px){
+  .hero-inner{padding:3rem 1.25rem 3.5rem}
+  .hero h1{font-size:2.15rem;letter-spacing:-1.2px}
+  .hero-sub{font-size:.95rem}
+  .hero-badge{font-size:.72rem;padding:.3rem .85rem}
+  .modulos-grid,.negocios-grid,.testi-grid{grid-template-columns:1fr}
+  .planes-grid{grid-template-columns:1fr 1fr;gap:.7rem}
+  .plan-card{padding:1.25rem 1rem}
+  .plan-price{font-size:1.8rem}
+  .gratis-card{flex-direction:column;padding:1.75rem 1.5rem}
+  .section-title{font-size:1.9rem;letter-spacing:-1px}
+  .section{padding:4rem 1.25rem}
+  .tickets-section,.testi-section,.sri-section{padding:3.5rem 0}
+  .tickets-inner,.testi-inner,.negocios-inner,.galeria-inner{padding:0 1.25rem}
+  .carousel-wrap{padding:0 20px}
+  .stats-inner{grid-template-columns:1fr 1fr;gap:.75rem;padding:1.5rem 1.25rem}
+  .stat-n{font-size:2rem}
+  .cta-section{padding:4rem 1.25rem}
+  .cta-section .section-title{font-size:1.85rem}
+  .cta-section p{font-size:.95rem}
+  .carousel-btn.prev{left:0}
+  .carousel-btn.next{right:0}
+  .carousel-btn{width:36px;height:36px}
+  .carousel-slide img{max-height:320px}
+  .carousel-thumbs{display:none}
+  .nav-inner{height:58px}
+}
+@media(max-width:400px){
+  .hero h1{font-size:1.9rem}
+  .planes-grid{grid-template-columns:1fr}
+  .hero-btns{flex-direction:column;align-items:stretch}
+  .btn-download,.btn-ghost{text-align:center;justify-content:center}
+}
+/* Mobile nav */
+.nav-links.open{
+  display:flex!important;flex-direction:column;
+  position:absolute;top:100%;left:0;right:0;
+  background:#fff;padding:1rem 1.5rem 1.5rem;
+  border-bottom:1px solid var(--borde);gap:.15rem;z-index:199;
+  box-shadow:0 8px 24px rgba(10,46,92,.1);
+}
+.nav-links.open a{border-radius:8px;padding:.65rem 1rem}
+</style>
+<!-- Vercel Web Analytics -->
+<script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+
+<!-- WHATSAPP FAB -->
+<a class="wa-fab" id="wa-fab" href="#" target="_blank" rel="noopener" title="Escríbenos por WhatsApp">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12 0C5.373 0 0 5.373 0 12c0 2.124.558 4.118 1.532 5.845L.057 23.571a.5.5 0 0 0 .612.612l5.726-1.475A11.95 11.95 0 0 0 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0zm0 21.818a9.812 9.812 0 0 1-5.031-1.387l-.36-.214-3.733.961.99-3.617-.235-.374A9.818 9.818 0 0 1 2.182 12C2.182 6.57 6.57 2.182 12 2.182S21.818 6.57 21.818 12 17.43 21.818 12 21.818z"/></svg>
+</a>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="logo" id="nav-logo">
+      <span class="logo-text" id="logo-text">Factra <span>Ecuador</span></span>
+    </a>
+    <ul class="nav-links" id="navlinks">
+      <li><a href="#modulos">Módulos</a></li>
+      <li><a href="#negocios">Negocios</a></li>
+      <li><a href="#sri">SRI</a></li>
+      <li><a href="#precios">Precios</a></li>
+      <li><a href="#" id="nav-cta" class="nav-cta">Prueba gratis</a></li>
+    </ul>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Menú">
+      <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+    </button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-blob hero-blob-1"></div>
+  <div class="hero-blob hero-blob-2"></div>
+  <div class="hero-blob hero-blob-3"></div>
+  <div class="hero-dots"></div>
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-badge"><span class="flag">🇪🇨</span> Hecho para Ecuador &nbsp;·&nbsp; Normativa SRI</div>
+      <h1 id="hero-h1">Tu negocio,<br><em>sin papel,<br>sin complicaciones.</em></h1>
+      <p class="hero-sub" id="hero-sub">Sistema de punto de venta con facturación electrónica. Se instala en tu computador Windows, funciona sin internet y tus datos siempre son tuyos.</p>
+      <div class="hero-btns">
+        <a href="#" id="btn-download" class="btn-download loading">
+          <span class="btn-download-main" id="btn-download-main">⏳ Cargando...</span>
+          <span class="btn-download-sub" id="btn-download-sub">Windows 10/11 · 64-bit</span>
+        </a>
+        <a href="#modulos" class="btn-ghost">Ver módulos →</a>
+      </div>
+      <div class="version-badge">
+        <div class="vdot"></div>
+        Versión actual:&nbsp;<span id="version-text">—</span>
+      </div>
+    </div>
+    <div class="hero-visual" id="hero-visual">
+      <div class="hero-screen-wrap" id="hero-screen-wrap">
+        <div class="hero-screen-track" id="hero-screen-track"></div>
+      </div>
+      <div class="mock-tag right" id="hero-tag-right">
+        <span class="mock-tag-icon">✅</span>
+        <span>SRI autorizado <span class="tag-val">en 2s</span></span>
+      </div>
+      <div class="mock-tag left" id="hero-tag-left">
+        <span class="mock-tag-icon">📦</span>
+        <span>Stock actualizado <span class="tag-val">automático</span></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div><div class="stat-n">14<span>+</span></div><div class="stat-l">Módulos incluidos</div></div>
+    <div class="stat-divider"><div class="stat-n">100<span>%</span></div><div class="stat-l">Normativa SRI Ecuador</div></div>
+    <div class="stat-divider"><div class="stat-n">$<span>0</span></div><div class="stat-l">Costo por factura emitida</div></div>
+    <div class="stat-divider"><div class="stat-n">$15</div><div class="stat-l">Plan mensual desde</div></div>
+  </div>
+</div>
+
+<!-- GALERÍA / CARRUSEL -->
+<section class="galeria-section" id="galeria" style="display:none">
+  <div class="galeria-inner">
+    <span class="section-tag">📸 Capturas reales</span>
+    <h2 class="section-title">Así se ve Factra Ecuador</h2>
+    <p class="section-sub">Interfaz limpia, rápida y diseñada para el día a día de tu negocio.</p>
+    <div class="carousel-wrap" id="carousel-wrap">
+      <div class="carousel-track-outer">
+        <div class="carousel-track" id="carousel-track"></div>
+      </div>
+      <span class="carousel-counter" id="carousel-counter">1 / 1</span>
+      <button class="carousel-btn prev" id="carousel-prev" aria-label="Anterior">
+        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <button class="carousel-btn next" id="carousel-next" aria-label="Siguiente">
+        <svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg>
+      </button>
+    </div>
+    <div class="carousel-dots" id="carousel-dots"></div>
+    <div class="carousel-thumbs" id="carousel-thumbs"></div>
+  </div>
+</section>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" onclick="cerrarLightbox()">✕</button>
+  <img id="lightbox-img" src="" alt="Captura Factra Ecuador">
+</div>
+
+<!-- TICKETS -->
+<section class="tickets-section" id="tickets">
+  <div class="tickets-inner">
+    <span class="section-tag">🧾 Comprobantes</span>
+    <h2 class="section-title">Tickets según tu negocio</h2>
+    <p class="section-sub">Factra imprime el comprobante correcto dependiendo de cómo trabajas. Sin configurar nada extra.</p>
+    <div class="tickets-tabs">
+      <button class="ttab active" onclick="cambiarTicket('venta',this)">
+        🛒 Ticket de Venta <span class="ttab-badge">Universal</span>
+      </button>
+      <button class="ttab" onclick="cambiarTicket('restaurante',this)">
+        🍽️ Ticket Restaurante <span class="ttab-badge">Solo resto</span>
+      </button>
+    </div>
+    <div class="ticket-panel active" id="tpanel-venta">
+      <div class="ticket-info">
+        <h3>Ticket de Venta + Factura Electrónica</h3>
+        <p>El comprobante estándar para cualquier tipo de negocio. Se imprime en impresora térmica al instante y al mismo tiempo envía la factura electrónica al SRI y al correo del cliente.</p>
+        <div class="ticket-negocios">
+          <span class="tneg ok">✓ Tienda / Minimarket</span>
+          <span class="tneg ok">✓ Venta + Servicios</span>
+          <span class="tneg ok">✓ Solo Servicios</span>
+          <span class="tneg ok">✓ Barbería / Salón</span>
+          <span class="tneg no">✕ No aplica en Restaurante</span>
+        </div>
+        <ul class="ticket-features">
+          <li>Nombre del negocio, RUC y dirección automáticos</li>
+          <li>Número de factura secuencial (001-001-000000001)</li>
+          <li>Detalle de productos, cantidades y precios</li>
+          <li>Subtotal, IVA, descuentos y total</li>
+          <li>Forma de pago y cambio</li>
+          <li>QR con código de autorización SRI</li>
+          <li>Mensaje de código de descuento para referidos</li>
+        </ul>
+      </div>
+      <div class="ticket-preview">
+        <div class="ticket-img-wrap" onclick="abrirLightbox('assets/screenshots/ticket_venta.jpeg')">
+          <img src="assets/screenshots/ticket_venta.jpeg" alt="Ticket de venta Factra Ecuador" loading="lazy">
+          <span class="ticket-img-hint">🔍 Ver en detalle</span>
+        </div>
+      </div>
+    </div>
+    <div class="ticket-panel" id="tpanel-restaurante">
+      <div class="ticket-info">
+        <h3>Ticket de Restaurante + Comanda de Cocina</h3>
+        <p>Diseñado para el flujo de un restaurante: al cobrar se imprime el ticket de venta para el cliente <strong>y</strong> automáticamente una comanda para cocina con el número de pedido y las notas del plato.</p>
+        <div class="ticket-negocios">
+          <span class="tneg ok">✓ Restaurante</span>
+          <span class="tneg ok">✓ Cafetería</span>
+          <span class="tneg ok">✓ Comida rápida</span>
+          <span class="tneg no">✕ No aplica en tienda o servicios</span>
+        </div>
+        <ul class="ticket-features">
+          <li>Ticket estándar de venta con facturación electrónica incluida</li>
+          <li>Número de pedido grande y visible en ambos tickets</li>
+          <li>Comanda automática para cocina al mismo tiempo</li>
+          <li>Notas por plato (ej: "Sin cebollas", "Término medio")</li>
+          <li>Hora del pedido y referencia de factura en la comanda</li>
+          <li>QR de autorización SRI en el ticket del cliente</li>
+        </ul>
+      </div>
+      <div class="ticket-preview">
+        <div class="ticket-img-wrap" onclick="abrirLightbox('assets/screenshots/ticket_restaurante.jpeg')">
+          <img src="assets/screenshots/ticket_restaurante.jpeg" alt="Ticket restaurante + comanda Factra Ecuador" loading="lazy">
+          <span class="ticket-img-hint">🔍 Ver en detalle</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MÓDULOS -->
+<section id="modulos">
+  <div class="section">
+    <span class="section-tag">Todo incluido</span>
+    <h2 class="section-title">Un solo sistema,<br>todo lo que necesitas</h2>
+    <p class="section-sub">Sin módulos extra que pagar. Sin sorpresas. Todo viene incluido desde el primer día.</p>
+    <div class="modulos-grid">
+      <div class="mod-card"><div class="mod-icon">🛒</div><div class="mod-title">Punto de Venta</div><div class="mod-desc">Caja rápida con código de barras, múltiples métodos de pago y ticket térmico impreso al instante. Display para el cliente incluido.</div></div>
+      <div class="mod-card"><div class="mod-icon">🧾</div><div class="mod-title">Facturación Electrónica</div><div class="mod-desc">Genera y envía facturas al SRI automáticamente. Le llega al correo de tu cliente sin que hagas nada extra. ATS mensual incluido.</div></div>
+      <div class="mod-card"><div class="mod-icon">📦</div><div class="mod-title">Inventario y Productos</div><div class="mod-desc">Stock en tiempo real con alertas, Kardex completo, múltiples listas de precio e impresión de etiquetas con código de barras en PDF.</div></div>
+      <div class="mod-card"><div class="mod-icon">👥</div><div class="mod-title">Clientes y Créditos</div><div class="mod-desc">Historial de compras, ventas a crédito con seguimiento de cuotas y estado de cuenta en PDF enviado automáticamente por correo.</div></div>
+      <div class="mod-card"><div class="mod-icon">🎁</div><div class="mod-title">Programa de Lealtad</div><div class="mod-desc">Sistema de puntos o sellos por compra o visita. Tus clientes acumulan y canjean directamente desde la caja.</div></div>
+      <div class="mod-card"><div class="mod-icon">👷</div><div class="mod-title">Empleados y Nómina</div><div class="mod-desc">Asistencia, comisiones automáticas por ventas y generación del rol de pagos en PDF listo para entregar.</div></div>
+      <div class="mod-card"><div class="mod-icon">🛍️</div><div class="mod-title">Compras y Proveedores</div><div class="mod-desc">Órdenes de compra, recepción de mercadería con actualización automática de stock e historial completo por proveedor.</div></div>
+      <div class="mod-card"><div class="mod-icon">📋</div><div class="mod-title">Cotizaciones</div><div class="mod-desc">Genera proformas en segundos, envíalas por correo y conviértelas en venta con un solo clic cuando el cliente acepta.</div></div>
+      <div class="mod-card"><div class="mod-icon">📊</div><div class="mod-title">Reportes y Dashboard</div><div class="mod-desc">Ventas del día, semana y mes en gráficas. Reporte de rentabilidad por producto y cierre de caja con Reporte Z.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- NEGOCIOS -->
+<section class="negocios-section" id="negocios">
+  <div class="negocios-inner">
+    <span class="section-tag">¿Para quién es?</span>
+    <h2 class="section-title">Se adapta a tu negocio</h2>
+    <p class="section-sub">No importa el rubro. Si emites facturas en Ecuador, Factra Ecuador es para ti.</p>
+    <div class="negocios-grid">
+      <div class="neg-card"><span class="neg-emoji">🏪</span><div class="neg-title">Tiendas y minimarkets</div><div class="neg-desc">POS, inventario, facturación electrónica y código de barras. Controla todo desde la caja.</div></div>
+      <div class="neg-card"><span class="neg-emoji">🍽️</span><div class="neg-title">Restaurantes y cafeterías</div><div class="neg-desc">Mesas, comandas, pantalla de cocina y tickets térmicos. El sistema conoce tu flujo de trabajo.</div></div>
+      <div class="neg-card"><span class="neg-emoji">✂️</span><div class="neg-title">Barberías y salones</div><div class="neg-desc">Agenda de citas, puntos por visita y comisiones automáticas para cada empleado.</div></div>
+      <div class="neg-card"><span class="neg-emoji">🔩</span><div class="neg-title">Ferreterías y distribuidoras</div><div class="neg-desc">Múltiples listas de precio, cotizaciones rápidas y control de compras a proveedores.</div></div>
+      <div class="neg-card"><span class="neg-emoji">💊</span><div class="neg-title">Farmacias</div><div class="neg-desc">Stock preciso, alertas de mínimo, etiquetas y facturación electrónica integrada.</div></div>
+      <div class="neg-card"><span class="neg-emoji">🏢</span><div class="neg-title">Cualquier negocio con RUC</div><div class="neg-desc">Si emites facturas electrónicas al SRI, Factra Ecuador cubre todo el proceso por ti.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- SRI -->
+<section class="sri-section" id="sri">
+  <div class="sri-inner">
+    <div>
+      <span class="section-tag">Facturación SRI</span>
+      <h2 class="section-title">Sin trámites,<br>sin complicaciones</h2>
+      <p class="section-sub" style="margin-top:.75rem">Factra Ecuador maneja todo el proceso de facturación electrónica. Desde generar el XML hasta enviar la factura al correo del cliente.</p>
+      <ul class="sri-list">
+        <li class="sri-item"><div class="sri-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Factura electrónica generada y autorizada por el SRI automáticamente</li>
+        <li class="sri-item"><div class="sri-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>XML autorizado descargable por cada venta</li>
+        <li class="sri-item"><div class="sri-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>PDF con QR code y clave de acceso para el cliente</li>
+        <li class="sri-item"><div class="sri-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>La factura llega al correo del cliente automáticamente</li>
+        <li class="sri-item"><div class="sri-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>ATS mensual generado en XML listo para presentar al SRI</li>
+        <li class="sri-item"><div class="sri-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Notas de crédito, débito y liquidaciones incluidas</li>
+        <li class="sri-item"><div class="sri-check"><svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg></div>Funciona en ambiente de pruebas y producción SRI</li>
+      </ul>
+    </div>
+    <div>
+      <div class="sri-visual">
+        <div class="sri-visual-title">¿Cómo funciona?</div>
+        <div class="sri-steps">
+          <div class="step"><div class="step-num">1</div><div class="step-text">Realizas la venta en la caja</div></div>
+          <div class="step-arrow">↓</div>
+          <div class="step"><div class="step-num">2</div><div class="step-text">El sistema genera el <span class="step-hl">XML y lo firma</span> con tu certificado</div></div>
+          <div class="step-arrow">↓</div>
+          <div class="step"><div class="step-num">3</div><div class="step-text">Lo envía al <span class="step-hl">SRI y lo autoriza</span> en segundos</div></div>
+          <div class="step-arrow">↓</div>
+          <div class="step"><div class="step-num">4</div><div class="step-text">La factura en PDF llega al <span class="step-hl">correo del cliente</span></div></div>
+          <div class="step-arrow">↓</div>
+          <div class="step"><div class="step-num">5</div><div class="step-text">A fin de mes, descarga el <span class="step-hl">ATS listo</span> para el SRI</div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIOS -->
+<section class="testi-section">
+  <div class="testi-inner">
+    <div style="text-align:center">
+      <span class="section-tag">Lo que dicen nuestros clientes</span>
+      <h2 class="section-title" style="max-width:500px;margin:0 auto .75rem">Negocios que ya confían en Factra</h2>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Antes usaba un sistema que fallaba seguido y las facturas no llegaban al SRI. Con Factra todo salió desde el primer día y el soporte es inmediato por WhatsApp."</p>
+        <div class="testi-author"><div class="testi-avatar">MR</div><div><div class="testi-name">Marco Rueda</div><div class="testi-biz">Minimarket El Ahorro, Ibarra</div></div></div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"El módulo de restaurante es increíble. Las mesas, la cocina, los tickets… todo en un solo lugar. Nunca más pedidos perdidos."</p>
+        <div class="testi-author"><div class="testi-avatar">LP</div><div><div class="testi-name">Laura Paredes</div><div class="testi-biz">Café Tostado, Quito</div></div></div>
+      </div>
+      <div class="testi-card">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">"Lo que más me gustó es que funciona sin internet. Aquí en la zona se va seguido la señal y mis ventas no paran. El precio también es muy justo."</p>
+        <div class="testi-author"><div class="testi-avatar">JV</div><div><div class="testi-name">Jorge Villacís</div><div class="testi-biz">Ferretería Don Jorge, Tulcán</div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRECIOS -->
+<section class="precios-section" id="precios">
+  <div class="precios-inner">
+    <div style="text-align:center;margin-bottom:.5rem">
+      <span class="section-tag">Planes y precios</span>
+      <h2 class="section-title">Empieza gratis,<br>paga cuando quieras</h2>
+      <p class="section-sub" style="max-width:500px;margin:0 auto 2.25rem">Sin tarjeta de crédito. Sin compromisos. Prueba el sistema completo durante 30 días.</p>
+    </div>
+    <div class="gratis-card">
+      <div>
+        <div class="gratis-tag">PLAN GRATUITO · CON PUBLICIDAD</div>
+        <div class="gratis-h">Gratis para siempre (con publicidad)</div>
+        <p class="gratis-p">Usa todos los módulos sin restricciones. En el plan gratuito, tus tickets y facturas llevan el banner publicitario de Factra Ecuador. Ideal para empezar sin costo.</p>
+        <div class="gratis-note">¿Quieres sin publicidad? Activa cualquier plan pago y listo.</div>
+      </div>
+      <div class="gratis-cta">
+        <a href="#" id="cta-prueba" class="btn-primary" style="white-space:nowrap;font-size:1rem">Activar plan gratuito →</a>
+      </div>
+    </div>
+    <div class="planes-grid">
+      <div class="plan-card">
+        <div class="plan-name">Mensual</div><div class="plan-dur">30 días</div>
+        <div class="plan-price"><sup>$</sup>15<sub>/mes</sub></div>
+        <div class="plan-save">&nbsp;</div>
+        <a href="#" class="plan-btn" data-plan="Mensual" data-precio="$15/mes">Quiero este plan</a>
+      </div>
+      <div class="plan-card">
+        <div class="plan-name">Trimestral</div><div class="plan-dur">90 días</div>
+        <div class="plan-price"><sup>$</sup>38</div>
+        <div class="plan-save">Ahorras 15%</div>
+        <a href="#" class="plan-btn" data-plan="Trimestral" data-precio="$38">Quiero este plan</a>
+      </div>
+      <div class="plan-card">
+        <div class="plan-name">Semestral</div><div class="plan-dur">6 meses</div>
+        <div class="plan-price"><sup>$</sup>70</div>
+        <div class="plan-save">Ahorras 22%</div>
+        <a href="#" class="plan-btn" data-plan="Semestral" data-precio="$70">Quiero este plan</a>
+      </div>
+      <div class="plan-card popular">
+        <div class="plan-popular-badge">⭐ Más popular</div>
+        <div class="plan-name">Anual</div><div class="plan-dur">12 meses</div>
+        <div class="plan-price"><sup>$</sup>130</div>
+        <div class="plan-save">Ahorras 28%</div>
+        <a href="#" class="plan-btn" data-plan="Anual" data-precio="$130">Quiero este plan</a>
+      </div>
+      <div class="plan-card">
+        <div class="plan-name">Vitalicia</div><div class="plan-dur">Sin vencimiento</div>
+        <div class="plan-price" style="font-size:1.3rem;padding-top:.4rem">A convenir</div>
+        <div class="plan-save">Pago único ♾</div>
+        <a href="#" class="plan-btn" data-plan="Vitalicia" data-precio="pago único">Quiero este plan</a>
+      </div>
+    </div>
+    <p style="font-size:.82rem;color:var(--texto3);margin-top:1.35rem;text-align:center">Todos los planes pagos <strong>sin publicidad</strong> · Tus tickets y facturas solo con tu logo y datos</p>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section class="cta-section">
+  <div class="cta-inner">
+    <h2 class="section-title">¿Listo para ordenar tu negocio?</h2>
+    <p>Escríbenos por WhatsApp y te activamos la prueba hoy mismo. Sin tarjeta, sin complicaciones.</p>
+    <a href="#" id="cta-final" class="btn-white">Escribir al WhatsApp →</a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <strong id="footer-nombre">Factra Ecuador</strong> · <span id="footer-tagline">Sistema POS con Facturación Electrónica</span><br>
+  <span style="font-size:.78rem;display:block;margin-top:.2rem">Desarrollado en Ecuador para negocios ecuatorianos · Normativa SRI vigente</span>
+</footer>
+
+<script>
+const WA_NUMBER = '593963615550';
+
+// Mensajes WhatsApp por plan
+const WA_MENSAJES = {
+  gratis: 'Hola, estoy interesado en adquirir Factra Punto de Venta en el *Plan Gratuito (con publicidad)*. ¿Me pueden dar más información?',
+  prueba: 'Hola, estoy interesado en adquirir Factra Punto de Venta y quisiera activar la prueba gratuita. ¿Me pueden ayudar?',
+  general: 'Hola, estoy interesado en adquirir Factra Punto de Venta. ¿Me pueden dar más información sobre los planes disponibles?',
+  Mensual:    'Hola, estoy interesado en adquirir Factra Punto de Venta en el *Plan Mensual ($15/mes)*. ¿Cómo procedo?',
+  Trimestral: 'Hola, estoy interesado en adquirir Factra Punto de Venta en el *Plan Trimestral ($38)*. ¿Cómo procedo?',
+  Semestral:  'Hola, estoy interesado en adquirir Factra Punto de Venta en el *Plan Semestral ($70)*. ¿Cómo procedo?',
+  Anual:      'Hola, estoy interesado en adquirir Factra Punto de Venta en el *Plan Anual ($130)*. ¿Cómo procedo?',
+  Vitalicia:  'Hola, estoy interesado en adquirir Factra Punto de Venta en el *Plan Vitalicio (pago único)*. ¿Cuál es el precio y cómo procedo?'
+};
+
+function waUrl(tipo) {
+  const msg = WA_MENSAJES[tipo] || WA_MENSAJES.general;
+  return `https://wa.me/${WA_NUMBER}?text=${encodeURIComponent(msg)}`;
+}
+
+// ── CONFIG ──────────────────────────────────────────
+const CONFIG_DEFAULT = {
+  github: { user: '', repo: '', exeName: 'Factra-Ecuador-Setup.exe' },
+  download: { btnText: 'Descargar gratis para Windows', btnSub: 'Windows 10/11 · 64-bit · Gratis', fallbackUrl: '' },
+  logo: { url: '', altText: 'Factra Ecuador' },
+  imagenes: [],
+  textos: {
+    waNumber: WA_NUMBER,
+    heroTitulo1: 'Tu negocio,',
+    heroTitulo2: 'sin papel, sin complicaciones.',
+    heroSub: 'Sistema de punto de venta con facturación electrónica. Se instala en tu computador Windows, funciona sin internet y tus datos siempre son tuyos.',
+    empresaNombre: 'Factra Ecuador',
+    empresaTagline: 'Sistema POS con Facturación Electrónica'
+  }
+};
+
+let CFG = CONFIG_DEFAULT;
+
+async function cargarConfig() {
+  try {
+    const r = await fetch('./config.json?_=' + Date.now());
+    if (r.ok) {
+      const json = await r.json();
+      CFG = { ...CONFIG_DEFAULT, ...json };
+      if (json.textos) CFG.textos = { ...CONFIG_DEFAULT.textos, ...json.textos };
+    }
+  } catch(e) {
+    await detectarImagenesLocales();
+  }
+  aplicarConfig();
+}
+
+async function detectarImagenesLocales() {
+  const found = [];
+  const exts = ['png','jpg','jpeg','webp'];
+  const checks = [];
+  for (let i = 1; i <= 20; i++) {
+    const n = String(i).padStart(2,'0');
+    for (const ext of exts) checks.push(`assets/screenshots/${n}.${ext}`);
+  }
+  await Promise.all(checks.map(url => new Promise(res => {
+    const img = new Image();
+    img.onload = () => { found.push({url, caption:'', _order: parseInt(url.match(/(\d+)\./)[1])}); res(); };
+    img.onerror = () => res();
+    img.src = url;
+  })));
+  if (found.length) {
+    found.sort((a,b) => a._order - b._order);
+    CFG.imagenes = found;
+  }
+}
+
+function aplicarConfig() {
+  // WhatsApp links
+  document.getElementById('wa-fab').href = waUrl('general');
+  document.getElementById('nav-cta').href = waUrl('prueba');
+  document.getElementById('cta-prueba').href = waUrl('gratis');
+  document.getElementById('cta-final').href = waUrl('general');
+
+  // Botones de plan con mensaje propio
+  document.querySelectorAll('.plan-btn[data-plan]').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      window.open(waUrl(this.dataset.plan), '_blank', 'noopener');
+    });
+  });
+
+  const t = CFG.textos || {};
+  if (t.heroTitulo1 || t.heroTitulo2) {
+    document.getElementById('hero-h1').innerHTML =
+      (t.heroTitulo1 || '') + '<br><em>' + (t.heroTitulo2 || '') + '</em>';
+  }
+  if (t.heroSub) document.getElementById('hero-sub').textContent = t.heroSub;
+  if (t.empresaNombre) document.getElementById('footer-nombre').textContent = t.empresaNombre;
+  if (t.empresaTagline) document.getElementById('footer-tagline').textContent = t.empresaTagline;
+
+  const logo = CFG.logo || {};
+  if (logo.url) {
+    const logoEl = document.getElementById('nav-logo');
+    const img = document.createElement('img');
+    img.src = logo.url;
+    img.alt = logo.altText || 'Logo';
+    img.onerror = () => img.remove();
+    logoEl.insertBefore(img, logoEl.firstChild);
+  }
+
+  const imgs = CFG.imagenes || [];
+  if (imgs.length > 0) {
+    document.getElementById('galeria').style.display = 'block';
+    iniciarCarrusel(imgs);
+    iniciarHeroScreen(imgs);
+  } else {
+    const hv = document.getElementById('hero-visual');
+    if (hv) hv.style.display = 'none';
+  }
+
+  cargarRelease();
+}
+
+async function cargarRelease() {
+  const gh = CFG.github || {};
+  const btn = document.getElementById('btn-download');
+  const mainTxt = document.getElementById('btn-download-main');
+  const subTxt = document.getElementById('btn-download-sub');
+  const versionEl = document.getElementById('version-text');
+  const dl = CFG.download || {};
+
+  if (!gh.user || !gh.repo) {
+    mainTxt.textContent = dl.btnText || 'Descargar gratis para Windows';
+    subTxt.textContent = dl.btnSub || 'Windows 10/11 · 64-bit';
+    btn.classList.remove('loading');
+    if (dl.fallbackUrl) { prepararDescarga(btn, dl.fallbackUrl); versionEl.textContent = '—'; return; }
+    btn.href = waUrl('prueba');
+    versionEl.textContent = 'próximamente';
+    return;
+  }
+
+  try {
+    const r = await fetch(
+      `https://api.github.com/repos/${gh.user}/${gh.repo}/releases/latest`,
+      { headers: { 'Accept': 'application/vnd.github.v3+json' } }
+    );
+    if (!r.ok) throw new Error('No release');
+    const data = await r.json();
+    const exeName = gh.exeName || 'Factra-Ecuador-Setup.exe';
+    const asset = data.assets.find(a => a.name === exeName) || data.assets.find(a => a.name.endsWith('.exe'));
+    if (asset) {
+      // Descarga directa — NO redirige a WhatsApp
+      btn.href = asset.browser_download_url;
+      btn.setAttribute('download', asset.name);
+      btn.target = '_blank';
+      btn.rel = 'noopener';
+      btn.classList.remove('loading');
+      mainTxt.textContent = dl.btnText || '⬇ Descargar Factra Ecuador';
+      const mb = (asset.size / 1024 / 1024).toFixed(1);
+      subTxt.textContent = `${dl.btnSub || 'Windows 10/11 · 64-bit'} · ${mb} MB`;
+      versionEl.textContent = data.tag_name;
+      // Quitar cualquier listener previo que pudiera redirigir a WA
+      btn.onclick = null;
+    } else throw new Error('Sin .exe');
+  } catch(e) {
+    // Si la API de GitHub falla (límite, sin release...), descarga directa de respaldo
+    btn.classList.remove('loading');
+    mainTxt.textContent = dl.btnText || '⬇ Descargar Factra Ecuador';
+    subTxt.textContent = dl.btnSub || 'Windows 10/11 · 64-bit';
+    if (dl.fallbackUrl) {
+      prepararDescarga(btn, dl.fallbackUrl);
+      const m = dl.fallbackUrl.match(/\/download\/([^/]+)\//);
+      versionEl.textContent = m ? m[1] : '—';
+    } else {
+      versionEl.textContent = 'contáctanos por WhatsApp';
+      btn.href = waUrl('prueba');
+      btn.removeAttribute('download');
+      btn.target = '_blank';
+    }
+  }
+}
+
+// Enlaza el botón a una descarga directa y registra el clic en Vercel Analytics
+function prepararDescarga(btn, url) {
+  btn.href = url;
+  btn.target = '_blank';
+  btn.rel = 'noopener';
+  btn.classList.remove('loading');
+}
+
+
+document.addEventListener('click', function(e){
+  var a = e.target.closest && e.target.closest('#btn-download');
+  if (a && typeof window.va === 'function') {
+    try { window.va('event', { name: 'descarga_factra', data: { version: (document.getElementById('version-text')||{}).textContent || '' } }); } catch(_) {}
+  }
+});
+
+// ── TABS TICKETS ──────────────────────────────────
+function cambiarTicket(tipo, el) {
+  document.querySelectorAll('.ticket-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.ttab').forEach(t => t.classList.remove('active'));
+  const panel = document.getElementById('tpanel-' + tipo);
+  if (panel) panel.classList.add('active');
+  if (el) el.classList.add('active');
+}
+
+// ── HERO SCREEN ───────────────────────────────────
+function iniciarHeroScreen(imgs) {
+  const track = document.getElementById('hero-screen-track');
+  const wrap = document.getElementById('hero-screen-wrap');
+  if (!track) return;
+  let idx = 0;
+  track.innerHTML = imgs.map((img, i) =>
+    `<div class="hero-screen-slide${i===0?' active':''}">
+       <img src="${escHtml(img.url)}" alt="${escHtml(img.caption||'')}" loading="${i===0?'eager':'lazy'}">
+     </div>`
+  ).join('');
+  const slides = track.querySelectorAll('.hero-screen-slide');
+  wrap.addEventListener('click', () => abrirLightbox(imgs[idx].url));
+  if (imgs.length <= 1) return;
+  setInterval(() => {
+    slides[idx].classList.remove('active');
+    idx = (idx + 1) % imgs.length;
+    slides[idx].classList.add('active');
+  }, 8000);
+}
+
+// ── CARRUSEL ─────────────────────────────────────
+let carruselIdx = 0, carruselTotal = 0, carruselTimer = null;
+const AUTOPLAY_MS = 7000;
+
+function iniciarCarrusel(imgs) {
+  carruselTotal = imgs.length;
+  const track = document.getElementById('carousel-track');
+  const dots = document.getElementById('carousel-dots');
+  const thumbs = document.getElementById('carousel-thumbs');
+
+  track.innerHTML = imgs.map((img, i) => `
+    <div class="carousel-slide" onclick="abrirLightbox('${escHtml(img.url)}')">
+      <img src="${escHtml(img.url)}" alt="${escHtml(img.caption || 'Captura ' + (i+1))}" loading="${i===0?'eager':'lazy'}">
+      ${img.caption ? `<div class="carousel-cap">${escHtml(img.caption)}</div>` : ''}
+    </div>
+  `).join('');
+
+  dots.innerHTML = imgs.map((_, i) =>
+    `<button class="cdot${i===0?' active':''}" data-i="${i}" aria-label="Slide ${i+1}"></button>`
+  ).join('');
+  dots.querySelectorAll('.cdot').forEach(d => d.addEventListener('click', () => irSlide(+d.dataset.i)));
+
+  thumbs.innerHTML = imgs.map((img, i) =>
+    `<div class="cthumb${i===0?' active':''}" data-i="${i}">
+       <img src="${escHtml(img.url)}" alt="" loading="lazy">
+     </div>`
+  ).join('');
+  thumbs.querySelectorAll('.cthumb').forEach(t => t.addEventListener('click', () => irSlide(+t.dataset.i)));
+
+  document.getElementById('carousel-prev').addEventListener('click', () => irSlide((carruselIdx - 1 + carruselTotal) % carruselTotal));
+  document.getElementById('carousel-next').addEventListener('click', () => irSlide((carruselIdx + 1) % carruselTotal));
+
+  document.addEventListener('keydown', e => {
+    if (document.getElementById('lightbox').classList.contains('open')) return;
+    if (e.key === 'ArrowLeft') irSlide((carruselIdx - 1 + carruselTotal) % carruselTotal);
+    if (e.key === 'ArrowRight') irSlide((carruselIdx + 1) % carruselTotal);
+  });
+
+  let tsX = 0;
+  const outer = document.querySelector('.carousel-track-outer');
+  outer.addEventListener('touchstart', e => { tsX = e.touches[0].clientX; }, {passive:true});
+  outer.addEventListener('touchend', e => {
+    const dx = e.changedTouches[0].clientX - tsX;
+    if (Math.abs(dx) > 40) irSlide(dx < 0 ? (carruselIdx + 1) % carruselTotal : (carruselIdx - 1 + carruselTotal) % carruselTotal);
+  });
+
+  if (carruselTotal <= 1) {
+    document.getElementById('carousel-prev').style.display = 'none';
+    document.getElementById('carousel-next').style.display = 'none';
+    dots.style.display = 'none';
+  }
+
+  actualizarCarrusel(0);
+  iniciarAutoplay();
+}
+
+function irSlide(idx) { carruselIdx = idx; actualizarCarrusel(idx); reiniciarAutoplay(); }
+
+function actualizarCarrusel(idx) {
+  document.getElementById('carousel-track').style.transform = `translateX(-${idx * 100}%)`;
+  document.getElementById('carousel-counter').textContent = `${idx + 1} / ${carruselTotal}`;
+  document.querySelectorAll('.cdot').forEach((d, i) => d.classList.toggle('active', i === idx));
+  document.querySelectorAll('.cthumb').forEach((t, i) => {
+    t.classList.toggle('active', i === idx);
+    if (i === idx) {
+      const strip = document.getElementById('carousel-thumbs');
+      if (strip) strip.scrollLeft = t.offsetLeft - strip.clientWidth/2 + t.clientWidth/2;
+    }
+  });
+}
+
+function iniciarAutoplay() {
+  if (carruselTotal <= 1) return;
+  carruselTimer = setInterval(() => { carruselIdx = (carruselIdx + 1) % carruselTotal; actualizarCarrusel(carruselIdx); }, AUTOPLAY_MS);
+}
+function reiniciarAutoplay() { clearInterval(carruselTimer); iniciarAutoplay(); }
+
+document.addEventListener('DOMContentLoaded', () => {
+  const outer = document.querySelector('.carousel-track-outer');
+  if (outer) {
+    outer.addEventListener('mouseenter', () => clearInterval(carruselTimer));
+    outer.addEventListener('mouseleave', iniciarAutoplay);
+  }
+});
+
+// ── LIGHTBOX ──────────────────────────────────────
+function abrirLightbox(url) {
+  document.getElementById('lightbox-img').src = url;
+  document.getElementById('lightbox').classList.add('open');
+  document.body.style.overflow = 'hidden';
+  clearInterval(carruselTimer);
+}
+function cerrarLightbox() {
+  document.getElementById('lightbox').classList.remove('open');
+  document.body.style.overflow = '';
+  iniciarAutoplay();
+}
+document.addEventListener('keydown', e => { if(e.key==='Escape') cerrarLightbox(); });
+document.getElementById('lightbox').addEventListener('click', function(e) { if(e.target===this) cerrarLightbox(); });
+
+// ── NAV MOBILE ────────────────────────────────────
+document.getElementById('nav-toggle').addEventListener('click', function() {
+  document.getElementById('navlinks').classList.toggle('open');
+});
+// Cerrar nav al hacer clic en enlace
+document.querySelectorAll('#navlinks a').forEach(a => {
+  a.addEventListener('click', () => document.getElementById('navlinks').classList.remove('open'));
+});
+
+function escHtml(s) {
+  return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+
+cargarConfig();
+</script>
+</body>
+</html>

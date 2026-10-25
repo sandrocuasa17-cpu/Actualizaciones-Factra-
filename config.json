@@ -1,0 +1,62 @@
+{
+  "github": {
+    "user": "Sandro21lop",
+    "repo": "FACTRA",
+    "exeName": ""
+  },
+  "download": {
+    "btnText": "⬇ Descargar Factra Ecuador",
+    "btnSub": "Windows 10/11 · 64-bit · Gratis",
+    "fallbackUrl": "https://github.com/Sandro21lop/FACTRA/releases/download/1.0.7/Factra_Setup_v1.0.7.exe"
+  },
+  "logo": {
+    "url": "",
+    "altText": "Factra Ecuador"
+  },
+  "textos": {
+    "waNumber": "593963615550",
+    "heroTitulo1": "Tu negocio,",
+    "heroTitulo2": "sin papel, sin complicaciones.",
+    "heroSub": "Sistema de punto de venta con facturación electrónica. Se instala en tu computador Windows, funciona sin internet y tus datos siempre son tuyos.",
+    "empresaNombre": "Factra Ecuador",
+    "empresaTagline": "Sistema POS con Facturación Electrónica"
+  },
+  "imagenes": [
+    {
+      "url": "assets/screenshots/01.png",
+      "caption": "Caja principal — Punto de venta rápido"
+    },
+    {
+      "url": "assets/screenshots/02.png",
+      "caption": "Módulo de inventario y productos"
+    },
+    {
+      "url": "assets/screenshots/03.png",
+      "caption": "Facturación electrónica integrada"
+    },
+    {
+      "url": "assets/screenshots/04.png",
+      "caption": "Reportes y dashboard de ventas"
+    },
+    {
+      "url": "assets/screenshots/05.png",
+      "caption": "Clientes y programa de lealtad"
+    },
+    {
+      "url": "assets/screenshots/06.png",
+      "caption": "Módulo de empleados y nómina"
+    },
+    {
+      "url": "assets/screenshots/07.png",
+      "caption": "Gestión de compras y proveedores"
+    },
+    {
+      "url": "assets/screenshots/08.png",
+      "caption": "Cotizaciones y proformas"
+    },
+    {
+      "url": "assets/screenshots/09.png",
+      "caption": "Modo restaurante — Mesas y cocina"
+    }
+  ]
+}

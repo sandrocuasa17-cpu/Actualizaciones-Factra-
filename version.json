@@ -1,6 +1,6 @@
 {
-  "version": "1.0.9",
-  "url": "https://github.com/sandrocuasa17-cpu/Actualizaciones-Factra-/releases/download/1.0.9/Factra_Setup_v1.0.9.exe",
-  "notas": "- Prueba: verificación de que el auto-update detecta esta versión desde la 1.0.8 instalada",
+  "version": "1.0.7",
+  "url": "https://github.com/Sandro21lop/FACTRA/releases/download/1.0.7/Factra_Setup_v1.0.7.exe",
+  "notas": "- Prueba de actualización automática",
   "obligatoria": false
 }

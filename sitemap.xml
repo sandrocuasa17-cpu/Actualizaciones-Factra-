@@ -1,9 +1,78 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://factraecuador.site/</loc>
-    <lastmod>2026-10-24</lastmod>
+    <lastmod>2026-10-26</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
+    <image:image><image:loc>https://factraecuador.site/assets/screenshots/01.png</image:loc></image:image>
+    <image:image><image:loc>https://factraecuador.site/assets/screenshots/02.png</image:loc></image:image>
+    <image:image><image:loc>https://factraecuador.site/assets/screenshots/03.png</image:loc></image:image>
+    <image:image><image:loc>https://factraecuador.site/assets/screenshots/04.png</image:loc></image:image>
+    <image:image><image:loc>https://factraecuador.site/assets/screenshots/05.png</image:loc></image:image>
+    <image:image><image:loc>https://factraecuador.site/assets/screenshots/06.png</image:loc></image:image>
+    <image:image><image:loc>https://factraecuador.site/assets/screenshots/07.png</image:loc></image:image>
+    <image:image><image:loc>https://factraecuador.site/assets/screenshots/08.png</image:loc></image:image>
+    <image:image><image:loc>https://factraecuador.site/assets/screenshots/09.png</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://factraecuador.site/herramientas</loc>
+    <lastmod>2026-10-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://factraecuador.site/calculadora-iva</loc>
+    <lastmod>2026-10-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://factraecuador.site/validador-cedula-ruc</loc>
+    <lastmod>2026-10-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://factraecuador.site/link-whatsapp</loc>
+    <lastmod>2026-10-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://factraecuador.site/calculadora-precio-venta</loc>
+    <lastmod>2026-10-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://factraecuador.site/generador</loc>
+    <lastmod>2026-10-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://factraecuador.site/recibo-de-pago</loc>
+    <lastmod>2026-10-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://factraecuador.site/cotizacion-pdf</loc>
+    <lastmod>2026-10-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://factraecuador.site/factura-proforma</loc>
+    <lastmod>2026-10-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://factraecuador.site/recibo-de-arriendo</loc>
+    <lastmod>2026-10-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
 </urlset>

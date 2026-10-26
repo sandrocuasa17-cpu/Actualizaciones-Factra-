@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="es-EC">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Generador Gratis de Facturas, Presupuestos y Recibos en PDF | Factra Ecuador</title>
+<meta name="description" content="Crea facturas, presupuestos (cotizaciones) y recibos de pago en PDF gratis, con IVA 15% y listo para enviar por WhatsApp. Sin registro. Para facturas válidas ante el SRI usa Factra.">
+<meta name="keywords" content="generador de facturas Ecuador, hacer recibo de pago gratis, crear presupuesto PDF, cotización en PDF gratis, proforma Ecuador, calcular IVA 15%, recibo de pago Ecuador, Factra Ecuador">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<meta name="theme-color" content="#0A2E5C">
+<link rel="canonical" href="https://factraecuador.site/generador">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_EC">
+<meta property="og:site_name" content="Factra Ecuador">
+<meta property="og:title" content="Generador gratis de facturas, presupuestos y recibos | Factra Ecuador">
+<meta property="og:description" content="Crea el documento en 1 minuto, descárgalo en PDF o envíalo por WhatsApp. Sin registro.">
+<meta property="og:url" content="https://factraecuador.site/generador">
+<meta property="og:image" content="https://factraecuador.site/assets/screenshots/01.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Generador de facturas, presupuestos y recibos - Factra Ecuador","url":"https://factraecuador.site/generador","applicationCategory":"BusinessApplication","operatingSystem":"Web","inLanguage":"es-EC","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"publisher":{"@type":"Organization","name":"Factra Ecuador","url":"https://factraecuador.site/"}}</script>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Fraunces:opsz,wght@9..144,700;9..144,900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--azul:#0A2E5C;--azul2:#1350A0;--azul3:#2272E8;--acento:#F5B800;--claro:#F2F7FF;--texto:#08192E;--texto2:#4A5E72;--borde:#D4E2F4;--verde:#00C17C}
+body{font-family:'Plus Jakarta Sans',sans-serif;color:var(--texto);background:var(--claro);-webkit-font-smoothing:antialiased}
+a{color:inherit}
+nav{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.94);backdrop-filter:blur(14px);border-bottom:1px solid var(--borde)}
+.nav-in{max-width:1240px;margin:0 auto;height:60px;padding:0 1.25rem;display:flex;align-items:center;justify-content:space-between;gap:1rem}
+.logo{font-family:'Fraunces',serif;font-weight:700;font-size:1.2rem;color:var(--azul);text-decoration:none}.logo span{color:var(--azul3)}
+.nav-r{display:flex;gap:.4rem;align-items:center}
+.nav-r a{text-decoration:none;font-size:.86rem;font-weight:600;color:var(--texto2);padding:.45rem .8rem;border-radius:8px}
+.nav-r a.cta{background:var(--azul);color:#fff}
+.top{background:linear-gradient(160deg,#041726,#0D3B6E 70%,#144EA0);color:#fff;padding:2.2rem 1.25rem 2.6rem}
+.top-in{max-width:1240px;margin:0 auto}
+.top h1{font-family:'Fraunces',serif;font-weight:900;font-size:clamp(1.7rem,4vw,2.6rem);letter-spacing:-1px;line-height:1.1;max-width:20ch}
+.top p{margin-top:.7rem;color:#B9CCE6;max-width:58ch;font-size:.98rem;line-height:1.55}
+.app{max-width:1240px;margin:-1.4rem auto 2rem;padding:0 1.25rem;display:grid;grid-template-columns:minmax(0,480px) minmax(0,1fr);gap:1.25rem;align-items:start}
+.form{background:#fff;border:1px solid var(--borde);border-radius:16px;padding:1.2rem;box-shadow:0 8px 28px rgba(10,46,92,.1)}
+.tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:.35rem;background:var(--claro);padding:.3rem;border-radius:12px;margin-bottom:1rem}
+.tabs button{border:0;background:none;font:600 .86rem 'Plus Jakarta Sans',sans-serif;padding:.6rem .3rem;border-radius:9px;color:var(--texto2);cursor:pointer}
+.tabs button.on{background:var(--azul);color:#fff}
+fieldset{border:0;margin-bottom:1rem}
+legend{font-weight:800;font-size:.92rem;color:var(--azul);margin-bottom:.5rem}
+.g2{display:grid;grid-template-columns:1fr 1fr;gap:.5rem}.full{grid-column:1/-1}
+label{display:block;font-size:.74rem;font-weight:600;color:var(--texto2);margin-bottom:.2rem}
+input,select,textarea{width:100%;font:500 .9rem 'Plus Jakarta Sans',sans-serif;color:var(--texto);border:1.5px solid var(--borde);border-radius:9px;padding:.55rem .65rem;background:#fff;min-width:0}
+input:focus,select:focus,textarea:focus,button:focus-visible{outline:2px solid var(--azul3);outline-offset:1px}
+textarea{resize:vertical;min-height:58px}
+.chk{display:flex;align-items:center;gap:.5rem;font-size:.82rem;font-weight:500;color:var(--texto2);margin-top:.45rem}.chk input{width:auto}
+.item{border:1.5px solid var(--borde);border-radius:11px;padding:.6rem;margin-bottom:.5rem;display:grid;grid-template-columns:1fr 70px 90px 78px 30px;gap:.4rem;align-items:end}
+.item .d{grid-column:1/-1}
+.x{border:0;background:none;color:#C0392B;font-size:1.2rem;cursor:pointer;height:36px}
+.btn{border:0;cursor:pointer;font:700 .88rem 'Plus Jakarta Sans',sans-serif;padding:.7rem 1.1rem;border-radius:10px;text-decoration:none;display:inline-flex;align-items:center;gap:.4rem;justify-content:center}
+.b1{background:var(--azul);color:#fff}.b2{background:#fff;color:var(--azul);border:1.5px solid var(--borde)}.b3{background:var(--verde);color:#fff}.by{background:var(--acento);color:var(--azul)}
+.add{width:100%;border:1.5px dashed var(--azul3);background:none;color:var(--azul3);font:700 .86rem 'Plus Jakarta Sans',sans-serif;padding:.6rem;border-radius:10px;cursor:pointer}
+.prev{position:sticky;top:72px}
+.actions{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:.8rem}
+.sheet{background:#fff;width:100%;max-width:794px;min-height:520px;margin:0 auto;padding:34px;border-radius:6px;box-shadow:0 10px 36px rgba(10,46,92,.16);font-size:13px;color:#10223a;line-height:1.45}
+.sh-top{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;border-bottom:3px solid var(--azul);padding-bottom:14px}
+.sh-top img{max-height:62px;max-width:170px;display:block;margin-bottom:6px}
+.sh-top h2{font-family:'Fraunces',serif;font-size:24px;color:var(--azul);letter-spacing:-.5px;text-align:right}
+.sh-top .r{text-align:right}.sh-top b{font-size:15px}
+.cols{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin:14px 0}
+.cols div{min-width:160px}.mut{color:#5b6f86;font-size:11px;font-weight:700}
+table{width:100%;border-collapse:collapse;margin:6px 0 10px}
+th{background:var(--azul);color:#fff;font-size:11px;text-align:right;padding:6px 8px}th:first-child{text-align:left}
+td{padding:6px 8px;border-bottom:1px solid #e3ebf6;text-align:right;vertical-align:top}td:first-child{text-align:left;white-space:pre-wrap}
+.tot{margin-left:auto;width:min(270px,100%)}.tot div{display:flex;justify-content:space-between;padding:3px 8px}
+.tot .t{background:var(--azul);color:#fff;font-weight:800;font-size:15px;border-radius:6px;margin-top:4px;padding:7px 8px}
+.words{margin:12px 0;padding:10px;background:var(--claro);border-radius:8px}
+.firmas{display:flex;gap:40px;margin-top:56px}.firmas div{flex:1;border-top:1px solid #10223a;text-align:center;padding-top:4px;font-size:11px}
+.nota{margin-top:12px;font-size:12px;white-space:pre-wrap}
+.aviso{margin-top:14px;padding:8px 10px;border:1px dashed #C0392B;color:#9b2c20;font-size:11px;border-radius:6px}
+.pie{margin-top:16px;text-align:center;color:#8A9BB0;font-size:10.5px}
+.promo{max-width:1240px;margin:0 auto 2.5rem;padding:0 1.25rem}
+.promo-in{background:linear-gradient(160deg,#082348,#144EA0);color:#fff;border-radius:18px;padding:1.6rem;display:grid;grid-template-columns:1.3fr 1fr;gap:1.2rem;align-items:center}
+.promo h2{font-family:'Fraunces',serif;font-size:1.6rem;letter-spacing:-.5px;line-height:1.15}
+.promo ul{margin:.8rem 0 0 1.1rem;color:#cfe0f5;font-size:.92rem;line-height:1.7}
+.promo .bt{display:flex;flex-direction:column;gap:.55rem}
+dialog{border:0;border-radius:16px;padding:1.5rem;max-width:420px;width:calc(100% - 2rem);box-shadow:0 20px 60px rgba(0,0,0,.3)}
+dialog::backdrop{background:rgba(4,23,38,.6)}
+dialog h3{font-family:'Fraunces',serif;color:var(--azul);font-size:1.35rem;margin-bottom:.5rem}
+dialog p{color:var(--texto2);font-size:.92rem;line-height:1.55;margin-bottom:1rem}
+dialog .bt{display:flex;flex-direction:column;gap:.5rem}
+@media(max-width:900px){.app{grid-template-columns:minmax(0,1fr)}.prev{position:static}.promo-in{grid-template-columns:1fr}.sheet{padding:18px}}
+@media(max-width:520px){.item{grid-template-columns:1fr 1fr 1fr 30px}.item .d{grid-column:1/-1}.item .iva{grid-column:1/4}.nav-r a:not(.cta){display:none}}
+@media print{@page{size:A4;margin:12mm}body{background:#fff}nav,.top,.form,.actions,.promo,dialog{display:none!important}.app{display:block;margin:0;padding:0}.prev{position:static}.sheet{box-shadow:none;padding:0;max-width:none;border-radius:0}*{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+.seo,.more{max-width:1240px;margin:0 auto 2rem;padding:0 1.25rem}.seo h2,.more h2{font-family:'Fraunces',serif;color:var(--azul);font-size:1.4rem;margin-bottom:.6rem}.seo p{color:var(--texto2);max-width:70ch;margin-bottom:.6rem;font-size:.95rem}.mgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:.8rem}.mc{background:#fff;border:1px solid var(--borde);border-radius:12px;padding:1rem;text-decoration:none;display:block}.mc b{display:block;font-family:'Fraunces',serif;color:var(--azul)}.mc span{font-size:.84rem;color:var(--texto2)}@media print{.seo,.more{display:none!important}}
+</style>
+<script>window.va=window.va||function(){(window.vaq=window.vaq||[]).push(arguments)};</script>
+<script defer src="/_vercel/insights/script.js"></script>
+</head>
+<body>
+<nav><div class="nav-in">
+  <a class="logo" href="/">Factra <span>Ecuador</span></a>
+  <div class="nav-r"><a href="/">Inicio</a><a href="/herramientas">Herramientas</a><a href="/#precios">Precios</a><a class="cta" id="n-wa" href="#" target="_blank" rel="noopener">Probar Factra</a></div>
+</div></nav>
+
+<header class="top"><div class="top-in">
+  <h1>Facturas, presupuestos y recibos gratis</h1>
+  <p>Llena los datos, mira el documento al instante y descárgalo en PDF o envíalo por WhatsApp. Sin registro: tus datos se quedan en tu navegador.</p>
+</div></header>
+
+<main class="app">
+  <section class="form" aria-label="Datos del documento">
+    <div class="tabs" id="tabs">
+      <button data-t="factura" class="on">Factura</button>
+      <button data-t="presupuesto">Presupuesto</button>
+      <button data-t="recibo">Recibo</button>
+    </div>
+
+    <fieldset><legend>Tu negocio</legend>
+      <div class="g2">
+        <div class="full"><label for="lg">Logo (opcional)</label><input type="file" id="lg" accept="image/*"></div>
+        <div class="full"><label>Nombre o razón social</label><input data-k="em.nombre" autocomplete="organization"></div>
+        <div><label>RUC / Cédula</label><input data-k="em.ruc" inputmode="numeric"></div>
+        <div><label>Teléfono</label><input data-k="em.tel" inputmode="tel"></div>
+        <div class="full"><label>Dirección</label><input data-k="em.dir"></div>
+        <div class="full"><label>Correo</label><input data-k="em.mail" type="email"></div>
+      </div>
+      <label class="chk"><input type="checkbox" id="rec" checked> Recordar los datos de mi negocio en este dispositivo</label>
+    </fieldset>
+
+    <fieldset><legend id="lc">Cliente</legend>
+      <div class="g2">
+        <div class="full"><label>Nombre</label><input data-k="cl.nombre"></div>
+        <div><label>RUC / Cédula</label><input data-k="cl.ruc" inputmode="numeric"></div>
+        <div><label>Teléfono / correo</label><input data-k="cl.cont"></div>
+        <div class="full"><label>Dirección</label><input data-k="cl.dir"></div>
+      </div>
+    </fieldset>
+
+    <fieldset><legend>Documento</legend>
+      <div class="g2">
+        <div><label>Número</label><input data-k="num"></div>
+        <div><label>Fecha</label><input data-k="fecha" type="date"></div>
+        <div id="w-vence"><label id="l-vence">Válido hasta</label><input data-k="vence" type="date"></div>
+        <div id="w-pago"><label>Forma de pago</label>
+          <select data-k="pago"><option>Efectivo</option><option>Transferencia</option><option>Tarjeta</option><option>Crédito</option><option>Otro</option></select></div>
+      </div>
+    </fieldset>
+
+    <fieldset><legend id="li">Productos o servicios</legend>
+      <div id="items"></div>
+      <button class="add" id="add" type="button">+ Agregar línea</button>
+      <div class="g2" style="margin-top:.7rem">
+        <div><label>Descuento global (%)</label><input data-k="desc" type="number" min="0" max="100" step="0.01" inputmode="decimal"></div>
+      </div>
+      <label class="chk"><input type="checkbox" data-k="incIva"> Los precios que ingreso ya incluyen IVA</label>
+    </fieldset>
+
+    <fieldset><legend>Notas</legend>
+      <textarea data-k="notas" placeholder="Condiciones, cuenta bancaria, tiempo de entrega…"></textarea>
+      <label class="chk"><input type="checkbox" data-k="marca"> Mostrar “Creado con Factra” al pie</label>
+    </fieldset>
+  </section>
+
+  <section class="prev" aria-label="Vista previa">
+    <div class="actions">
+      <button class="btn b1" id="pdf" type="button">⬇ Descargar PDF</button>
+      <button class="btn b3" id="wa" type="button">Enviar por WhatsApp</button>
+      <button class="btn b2" id="nuevo" type="button">Documento nuevo</button>
+    </div>
+    <div class="sheet" id="doc"></div>
+  </section>
+</main>
+
+<section class="seo"><h2>Documentos listos en un minuto</h2><p>Llena tus datos, agrega los productos o servicios y descarga el PDF. El IVA se calcula solo, con el desglose por tarifa. Tus datos se guardan únicamente en tu navegador.</p></section>
+<section class="promo"><div class="promo-in">
+  <div>
+    <h2>¿Necesitas facturas que sí valgan ante el SRI?</h2>
+    <p style="color:#B9CCE6;margin-top:.5rem;font-size:.92rem">Este generador crea documentos de apoyo. Con Factra emites facturas electrónicas autorizadas:</p>
+    <ul>
+      <li>Envío automático al SRI, con XML y PDF con código QR</li>
+      <li>Inventario, clientes, cierre de caja y cotizaciones incluidos</li>
+      <li>Funciona sin internet, desde $5 al mes</li>
+    </ul>
+  </div>
+  <div class="bt">
+    <a class="btn by" id="p-wa" href="#" target="_blank" rel="noopener">Activar prueba por WhatsApp</a>
+    <a class="btn b2" href="/#precios">Ver planes y descargar</a>
+  </div>
+</div></section>
+
+<section class="more"><h2>Más herramientas gratis</h2><div class="mgrid"><a class="mc" href="/calculadora-iva"><b>Calculadora de IVA 15%</b><span>Agrega o quita el IVA de cualquier precio al instante.</span></a><a class="mc" href="/validador-cedula-ruc"><b>Validador de cédula y RUC</b><span>Comprueba si el número tiene un formato válido.</span></a><a class="mc" href="/link-whatsapp"><b>Link y QR de WhatsApp</b><span>Crea un enlace con mensaje y su código QR.</span></a><a class="mc" href="/calculadora-precio-venta"><b>Calculadora de precio de venta</b><span>Costo, margen e IVA: cuánto cobrar.</span></a><a class="mc" href="/recibo-de-pago"><b>Recibo de pago en PDF</b><span>Con el valor en letras y firmas.</span></a><a class="mc" href="/cotizacion-pdf"><b>Cotización en PDF</b><span>Presupuestos con fecha de validez.</span></a><a class="mc" href="/factura-proforma"><b>Factura proforma en PDF</b><span>Documento previo a la venta con IVA.</span></a><a class="mc" href="/recibo-de-arriendo"><b>Recibo de arriendo</b><span>Comprobante mensual de arriendo.</span></a></div></section>
+<dialog id="dlg">
+  <h3>¿Listo tu documento?</h3>
+  <p>Si emites facturas seguido, Factra las genera ya autorizadas por el SRI y las guarda por ti. Pruébala sin costo.</p>
+  <div class="bt">
+    <a class="btn by" id="d-wa" href="#" target="_blank" rel="noopener">Probar Factra por WhatsApp</a>
+    <a class="btn b2" href="/#precios">Ver precios</a>
+    <button class="btn b2" id="d-x" type="button">Seguir con mi documento</button>
+  </div>
+</dialog>
+
+<script>
+const WA='593963615550', KEY='factra_gen_v1';
+const $=s=>document.querySelector(s), esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const wa=t=>`https://wa.me/${WA}?text=${encodeURIComponent(t)}`;
+const track=(n,d)=>{try{window.va('event',{name:n,data:d})}catch(_){}};
+const money=n=>'$'+(Math.round((n+Number.EPSILON)*100)/100).toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2});
+const hoy=()=>new Date(Date.now()-new Date().getTimezoneOffset()*6e4).toISOString().slice(0,10);
+const TIPOS={factura:{t:'FACTURA',pre:'001-001-',pad:9,cl:'Cliente'},presupuesto:{t:'PRESUPUESTO',pre:'PRE-',pad:4,cl:'Cliente'},recibo:{t:'RECIBO DE PAGO',pre:'REC-',pad:4,cl:'Recibí de'}};
+const vacio=()=>({tipo:'factura',em:{},cl:{},num:'',fecha:hoy(),vence:'',pago:'Efectivo',desc:0,incIva:false,notas:'',marca:true,items:[{d:'',q:1,p:'',iva:15}]});
+let S=vacio(), seq={factura:1,presupuesto:1,recibo:1}, logo='';
+
+function cargar(){
+  try{const j=JSON.parse(localStorage.getItem(KEY)||'{}'); if(j.em){S.em=j.em;} if(j.seq)seq={...seq,...j.seq}; logo=j.logo||'';}catch(_){}
+  S.num=siguiente(S.tipo);
+}
+function guardar(){
+  try{ if($('#rec').checked) localStorage.setItem(KEY,JSON.stringify({em:S.em,seq,logo})); else localStorage.removeItem(KEY);}catch(_){}
+}
+const siguiente=t=>TIPOS[t].pre+String(seq[t]).padStart(TIPOS[t].pad,'0');
+
+// enlazar campos por ruta data-k
+const get=(o,k)=>k.split('.').reduce((a,p)=>a?.[p],o);
+const set=(o,k,v)=>{const a=k.split('.');const l=a.pop();a.reduce((x,p)=>x[p]??={},o)[l]=v};
+function volcar(){document.querySelectorAll('[data-k]').forEach(el=>{const v=get(S,el.dataset.k);if(el.type==='checkbox')el.checked=!!v;else el.value=v??''})}
+document.addEventListener('input',e=>{const el=e.target;
+  if(el.dataset.k){set(S,el.dataset.k,el.type==='checkbox'?el.checked:el.value);guardar();pintar()}
+  else if(el.dataset.i!==undefined){const it=S.items[el.dataset.i];it[el.dataset.f]=el.dataset.f==='d'?el.value:el.dataset.f==='iva'?+el.value:el.value;pintar()}
+});
+$('#rec').addEventListener('change',guardar);
+
+// líneas
+function lineas(){
+  $('#items').innerHTML=S.items.map((it,i)=>`<div class="item">
+    <div class="d"><label>Descripción</label><input data-i="${i}" data-f="d" value="${esc(it.d)}" placeholder="Ej. Mantenimiento de computadora"></div>
+    <div><label>Cant.</label><input data-i="${i}" data-f="q" type="number" min="0" step="any" inputmode="decimal" value="${esc(it.q)}"></div>
+    <div><label>P. unitario</label><input data-i="${i}" data-f="p" type="number" min="0" step="any" inputmode="decimal" value="${esc(it.p)}"></div>
+    <div class="iva"><label>IVA</label><select data-i="${i}" data-f="iva">${[15,8,0].map(v=>`<option value="${v}"${v===+it.iva?' selected':''}>${v}%</option>`).join('')}</select></div>
+    <button class="x" type="button" data-del="${i}" aria-label="Quitar línea">×</button></div>`).join('');
+}
+$('#items').addEventListener('click',e=>{const b=e.target.closest('[data-del]');if(!b)return;S.items.splice(+b.dataset.del,1);if(!S.items.length)S.items.push({d:'',q:1,p:'',iva:15});lineas();pintar()});
+$('#add').onclick=()=>{S.items.push({d:'',q:1,p:'',iva:15});lineas();pintar();const f=document.querySelectorAll('#items [data-f="d"]');f[f.length-1].focus()};
+
+// cálculo con desglose por tarifa (como el SRI)
+function calcular(){
+  const g={};let bruto=0;
+  S.items.forEach(it=>{const q=+it.q||0,p=+it.p||0,r=+it.iva||0;const base=q*(S.incIva?p/(1+r/100):p);bruto+=base;g[r]=(g[r]||0)+base});
+  const d=Math.min(Math.max(+S.desc||0,0),100)/100, descuento=bruto*d;
+  const sub={},iva={};let ivaT=0,subT=0;
+  Object.keys(g).map(Number).sort((a,b)=>b-a).forEach(r=>{sub[r]=g[r]*(1-d);iva[r]=Math.round(sub[r]*r)/100;subT+=sub[r];ivaT+=iva[r]});
+  return{bruto,descuento,sub,iva,ivaT,total:Math.round((subT+ivaT)*100)/100};
+}
+
+// número a letras
+const U='cero uno dos tres cuatro cinco seis siete ocho nueve diez once doce trece catorce quince dieciséis diecisiete dieciocho diecinueve veinte veintiuno veintidós veintitrés veinticuatro veinticinco veintiséis veintisiete veintiocho veintinueve'.split(' '),
+D=['','','','treinta','cuarenta','cincuenta','sesenta','setenta','ochenta','noventa'],
+C=['','ciento','doscientos','trescientos','cuatrocientos','quinientos','seiscientos','setecientos','ochocientos','novecientos'];
+const un=s=>s.replace(/veintiuno$/,'veintiún').replace(/uno$/,'un');
+function letras(n){
+  if(n<30)return U[n];
+  if(n<100)return D[Math.floor(n/10)]+(n%10?' y '+U[n%10]:'');
+  if(n===100)return 'cien';
+  if(n<1000)return C[Math.floor(n/100)]+(n%100?' '+letras(n%100):'');
+  if(n<1e6){const m=Math.floor(n/1e3);return(m===1?'mil':un(letras(m))+' mil')+(n%1e3?' '+letras(n%1e3):'')}
+  const m=Math.floor(n/1e6);return(m===1?'un millón':un(letras(m))+' millones')+(n%1e6?' '+letras(n%1e6):'');
+}
+function enLetras(t){const e=Math.floor(t),c=Math.round((t-e)*100);const s=letras(e)+' con '+String(c).padStart(2,'0')+'/100 dólares';return s[0].toUpperCase()+s.slice(1)}
+const fmtF=f=>f?f.split('-').reverse().join('/'):'';
+
+function pintar(){
+  const T=TIPOS[S.tipo],c=calcular(),em=S.em,cl=S.cl,rec=S.tipo==='recibo';
+  const filas=S.items.filter(i=>i.d||+i.p).map(i=>{const q=+i.q||0,p=+i.p||0;return`<tr><td>${esc(i.d)}</td><td>${q}</td><td>${money(p)}</td><td>${i.iva}%</td><td>${money(q*p)}</td></tr>`}).join('')||'<tr><td colspan="5" style="text-align:center;color:#8A9BB0">Agrega tus productos o servicios</td></tr>';
+  const rows=Object.keys(c.sub).map(Number);
+  $('#doc').innerHTML=`
+  <div class="sh-top">
+    <div>${logo?`<img src="${logo}" alt="">`:''}<b>${esc(em.nombre||'Nombre de tu negocio')}</b><br>
+      ${em.ruc?'RUC/CI: '+esc(em.ruc)+'<br>':''}${em.dir?esc(em.dir)+'<br>':''}${[em.tel,em.mail].filter(Boolean).map(esc).join(' · ')}</div>
+    <div class="r"><h2>${T.t}</h2><b>N.º ${esc(S.num)}</b><br>Fecha: ${fmtF(S.fecha)}${S.tipo==='presupuesto'&&S.vence?'<br>Válido hasta: '+fmtF(S.vence):''}</div>
+  </div>
+  <div class="cols">
+    <div><span class="mut">${rec?'RECIBÍ DE':'CLIENTE'}</span><br><b>${esc(cl.nombre||'—')}</b><br>${cl.ruc?'RUC/CI: '+esc(cl.ruc)+'<br>':''}${cl.dir?esc(cl.dir)+'<br>':''}${esc(cl.cont||'')}</div>
+    ${S.tipo==='presupuesto'?'':`<div><span class="mut">FORMA DE PAGO</span><br>${esc(S.pago)}</div>`}
+  </div>
+  <table><thead><tr><th>${rec?'Concepto':'Descripción'}</th><th>Cant.</th><th>P. unit.</th><th>IVA</th><th>Total</th></tr></thead><tbody>${filas}</tbody></table>
+  <div class="tot">
+    ${c.descuento?`<div><span>Subtotal</span><span>${money(c.bruto)}</span></div><div><span>Descuento ${+S.desc}%</span><span>-${money(c.descuento)}</span></div>`:''}
+    ${rows.map(r=>`<div><span>Subtotal ${r}%</span><span>${money(c.sub[r])}</span></div>`).join('')}
+    ${rows.filter(r=>r>0).map(r=>`<div><span>IVA ${r}%</span><span>${money(c.iva[r])}</span></div>`).join('')}
+    <div class="t"><span>TOTAL</span><span>${money(c.total)}</span></div>
+  </div>
+  ${rec?`<div class="words">Recibí la cantidad de <b>${enLetras(c.total)}</b> (${money(c.total)}) por los conceptos detallados.</div><div class="firmas"><div>Recibí conforme</div><div>Entregué conforme</div></div>`:''}
+  ${S.notas?`<div class="nota"><b>Notas:</b> ${esc(S.notas)}</div>`:''}
+  ${S.tipo==='factura'?'<div class="aviso">Documento sin validez tributaria: no es una factura electrónica autorizada por el SRI.</div>':''}
+  ${S.marca?'<div class="pie">Creado gratis con Factra Ecuador · factraecuador.site</div>':''}`;
+}
+
+function modo(){
+  const t=S.tipo;
+  document.querySelectorAll('#tabs button').forEach(b=>b.classList.toggle('on',b.dataset.t===t));
+  $('#lc').textContent=t==='recibo'?'Recibí de':'Cliente';
+  $('#li').textContent=t==='recibo'?'Conceptos':'Productos o servicios';
+  $('#w-vence').style.display=t==='presupuesto'?'':'none';
+  $('#w-pago').style.display=t==='presupuesto'?'none':'';
+}
+$('#tabs').addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;S.tipo=b.dataset.t;S.num=siguiente(S.tipo);modo();volcar();pintar();track('gen_tipo',{tipo:S.tipo})});
+
+// logo reducido para que quepa en localStorage
+$('#lg').addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();
+  r.onload=()=>{const im=new Image();im.onload=()=>{const k=Math.min(1,300/im.width),cv=document.createElement('canvas');cv.width=im.width*k;cv.height=im.height*k;cv.getContext('2d').drawImage(im,0,0,cv.width,cv.height);logo=cv.toDataURL('image/png');guardar();pintar()};im.src=r.result};r.readAsDataURL(f)});
+
+$('#pdf').onclick=()=>{track('gen_pdf',{tipo:S.tipo});const t=document.title;document.title=`${TIPOS[S.tipo].t.toLowerCase().replace(/ /g,'-')}-${S.num}`;window.print();document.title=t};
+window.addEventListener('afterprint',()=>{try{if(sessionStorage.getItem('fg_dlg'))return;sessionStorage.setItem('fg_dlg','1')}catch(_){}$('#dlg').showModal()});
+$('#d-x').onclick=()=>$('#dlg').close();
+$('#wa').onclick=()=>{const c=calcular(),T=TIPOS[S.tipo];track('gen_wa',{tipo:S.tipo});
+  const txt=`*${T.t} N.º ${S.num}*\n${S.em.nombre||''}\nCliente: ${S.cl.nombre||'—'}\nFecha: ${fmtF(S.fecha)}\n`+S.items.filter(i=>i.d).map(i=>`• ${i.q} x ${i.d}: ${money((+i.q||0)*(+i.p||0))}`).join('\n')+`\n*Total: ${money(c.total)}*\n\nCreado gratis en https://factraecuador.site/generador`;
+  window.open('https://wa.me/?text='+encodeURIComponent(txt),'_blank','noopener')};
+$('#nuevo').onclick=()=>{seq[S.tipo]++;const em=S.em,t=S.tipo;S=vacio();S.em=em;S.tipo=t;S.num=siguiente(t);guardar();volcar();lineas();modo();pintar()};
+
+['#n-wa','#p-wa','#d-wa'].forEach(s=>$(s).href=wa('Hola, usé el generador gratis de la web y quiero probar Factra para emitir facturas electrónicas al SRI.'));
+cargar();volcar();lineas();modo();pintar();
+const T0=(window.PRE&&window.PRE.tipo)||location.hash.slice(1);
+if(TIPOS[T0]&&T0!=='factura')$(`#tabs [data-t="${T0}"]`).click();
+if(window.PRE&&window.PRE.d){S.items[0].d=window.PRE.d;lineas();pintar()}
+</script>
+</body>
+</html>

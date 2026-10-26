@@ -582,6 +582,22 @@ footer a:hover{color:var(--acento)}
 .faq-item[open] summary::after{content:'\2013'}
 .faq-item[open]{border-color:var(--azul3)}
 .faq-item p{padding:0 1.25rem 1.15rem;color:var(--texto3);line-height:1.7;font-size:.93rem;margin:0}
+
+/* ── HERRAMIENTA GRATIS ── */
+.nav-links a.nav-tool{color:var(--azul);font-weight:700;background:rgba(245,184,0,.2)}
+.btn-tool{display:inline-flex;align-items:center;gap:.45rem;background:var(--acento);color:var(--azul);font-weight:700;font-size:.93rem;padding:.85rem 1.4rem;border-radius:12px;text-decoration:none;transition:transform .15s,box-shadow .2s}
+.btn-tool:hover{transform:translateY(-2px);box-shadow:0 8px 22px rgba(245,184,0,.35)}
+.tool-section{padding:4rem 1.5rem;background:var(--claro)}
+.tool-inner{max-width:1120px;margin:0 auto}
+.tool-inner h2{font-family:'Fraunces',serif;font-weight:900;font-size:clamp(1.7rem,3.4vw,2.4rem);color:var(--azul);letter-spacing:-1px;max-width:22ch}
+.tool-inner>p{color:var(--texto2);margin-top:.7rem;max-width:60ch;line-height:1.6}
+.tool-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1.8rem}
+.tool-card{background:#fff;border:1px solid var(--borde);border-radius:var(--r);padding:1.3rem;text-decoration:none;color:inherit;box-shadow:var(--shadow-sm);transition:box-shadow .2s,border-color .2s}
+.tool-card:hover{box-shadow:var(--shadow-md);border-color:var(--azul4)}
+.tool-card b{font-family:'Fraunces',serif;font-size:1.15rem;color:var(--azul);display:block;margin-bottom:.35rem}
+.tool-card span{font-size:.88rem;color:var(--texto2);line-height:1.5}
+.tool-note{margin-top:1.2rem;font-size:.82rem;color:var(--texto3)}
+@media(max-width:760px){.tool-cards{grid-template-columns:1fr}}
 </style>
 <!-- Vercel Web Analytics -->
 <script>window.va = window.va || function () { (window.vaq = window.vaq || []).push(arguments); };</script>
@@ -601,6 +617,7 @@ footer a:hover{color:var(--acento)}
       <span class="logo-text" id="logo-text">Factra <span>Ecuador</span></span>
     </a>
     <ul class="nav-links" id="navlinks">
+      <li><a href="herramientas" class="nav-tool">Herramientas gratis</a></li>
       <li><a href="#modulos">Módulos</a></li>
       <li><a href="#negocios">Negocios</a></li>
       <li><a href="#sri">SRI</a></li>
@@ -629,6 +646,7 @@ footer a:hover{color:var(--acento)}
           <span class="btn-download-main" id="btn-download-main">⏳ Cargando...</span>
           <span class="btn-download-sub" id="btn-download-sub">Windows 10/11 · 64-bit</span>
         </a>
+        <a href="generador" class="btn-tool" id="btn-tool-hero">🧾 Crear factura o recibo gratis</a>
         <a href="#modulos" class="btn-ghost">Ver módulos →</a>
       </div>
       <div class="version-badge">
@@ -661,6 +679,21 @@ footer a:hover{color:var(--acento)}
     <div class="stat-divider"><div class="stat-n">$15</div><div class="stat-l">Plan mensual desde</div></div>
   </div>
 </div>
+
+<!-- HERRAMIENTA GRATIS -->
+<section class="tool-section" id="herramienta">
+  <div class="tool-inner">
+    <h2>Genera tus documentos gratis, sin instalar nada</h2>
+    <p>Crea en un minuto una factura, un presupuesto o un recibo de pago con IVA calculado. Descárgalo en PDF o envíalo por WhatsApp. No necesitas registrarte.</p>
+    <div class="tool-cards">
+      <a class="tool-card" href="generador"><b>Factura</b><span>Con desglose de IVA 15%, 8% y 0% y totales listos para tu cliente.</span></a>
+      <a class="tool-card" href="generador#presupuesto"><b>Presupuesto</b><span>Cotizaciones con fecha de validez para cerrar la venta más rápido.</span></a>
+      <a class="tool-card" href="generador#recibo"><b>Recibo de pago</b><span>Con el valor en letras y espacio para firmas.</span></a>
+    </div>
+    <p class="tool-more" style="margin-top:1.2rem;font-size:.9rem;color:var(--texto2)">También gratis: <a href="calculadora-iva">Calculadora de IVA</a> · <a href="validador-cedula-ruc">Validador de cédula y RUC</a> · <a href="link-whatsapp">Link y QR de WhatsApp</a> · <a href="calculadora-precio-venta">Precio de venta</a> · <a href="herramientas"><b>Ver todas</b></a></p>
+    <p class="tool-note">Son documentos de apoyo, sin validez tributaria. Para emitir facturas electrónicas autorizadas por el SRI, usa Factra.</p>
+  </div>
+</section>
 
 <!-- GALERÍA / CARRUSEL -->
 <section class="galeria-section" id="galeria" style="display:none">
@@ -947,6 +980,7 @@ footer a:hover{color:var(--acento)}
 <footer>
   <strong id="footer-nombre">Factra Ecuador</strong> · <span id="footer-tagline">Sistema POS con Facturación Electrónica</span><br>
   <span style="font-size:.78rem;display:block;margin-top:.2rem">Desarrollado en Ecuador para negocios ecuatorianos · Normativa SRI vigente</span>
+  <a href="herramientas" style="display:inline-block;margin-top:.5rem;font-size:.82rem;color:inherit">Herramientas gratis para tu negocio</a>
 </footer>
 
 <script>
@@ -1140,6 +1174,8 @@ function prepararDescarga(btn, url) {
 
 
 document.addEventListener('click', function(e){
+  var t = e.target.closest && e.target.closest('#btn-tool-hero');
+  if (t && typeof window.va === 'function') { try { window.va('event', { name: 'clic_generador_hero' }); } catch(_) {} }
   var a = e.target.closest && e.target.closest('#btn-download');
   if (a && typeof window.va === 'function') {
     try { window.va('event', { name: 'descarga_factra', data: { version: (document.getElementById('version-text')||{}).textContent || '' } }); } catch(_) {}
